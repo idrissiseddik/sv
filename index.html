@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviez-vous que...? | M.Seddik ELIdrissi</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           🌟 DESIGN MODERNE - VERSION LISTBOX
+           ============================================ */
+        
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #111128;
+            --bg-card: #16163a;
+            --bg-card-hover: #1e1e4a;
+            --text-primary: #ffffff;
+            --text-secondary: #a8a8d4;
+            --text-muted: #6a6a9e;
+            --gradient-main: linear-gradient(135deg, #7c5cfc 0%, #5c3dbe 50%, #3d1f8a 100%);
+            --gradient-accent: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+            --gradient-success: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            --shadow-glow: 0 0 40px rgba(124, 92, 252, 0.15);
+            --border-glow: 1px solid rgba(124, 92, 252, 0.2);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 110px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(124, 92, 252, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(244, 114, 182, 0.05) 0%, transparent 60%);
+        }
+
+        /* ============================================
+           ANIMATED BACKGROUND
+           ============================================ */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(124, 92, 252, 0.3);
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; width: 6px; height: 6px; }
+        .particle:nth-child(2) { left: 25%; animation-duration: 30s; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 40%; animation-duration: 22s; animation-delay: 4s; width: 8px; height: 8px; opacity: 0.5; }
+        .particle:nth-child(4) { left: 55%; animation-duration: 28s; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 70%; animation-duration: 26s; animation-delay: 3s; width: 5px; height: 5px; }
+        .particle:nth-child(6) { left: 85%; animation-duration: 32s; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 15%; animation-duration: 35s; animation-delay: 7s; width: 10px; height: 10px; opacity: 0.2; }
+        .particle:nth-child(8) { left: 50%; animation-duration: 20s; animation-delay: 6s; }
+        .particle:nth-child(9) { left: 75%; animation-duration: 27s; animation-delay: 8s; width: 7px; height: 7px; }
+        .particle:nth-child(10) { left: 90%; animation-duration: 29s; animation-delay: 9s; }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(124, 92, 252, 0.08);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            transition: var(--transition);
+        }
+
+        .app-header.scrolled {
+            background: rgba(10, 10, 26, 0.96);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 4px 20px rgba(124, 92, 252, 0.3);
+        }
+
+        .header-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            -webkit-text-fill-color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(124, 92, 252, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .header-btn:hover {
+            background: var(--gradient-main);
+            color: white;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(124, 92, 252, 0.3);
+        }
+
+        .header-btn.refreshing i {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero-section {
+            text-align: center;
+            padding: 2rem 0 2.5rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(124, 92, 252, 0.12);
+            border: 1px solid rgba(124, 92, 252, 0.2);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-badge i {
+            color: #7c5cfc;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-title span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           STATS
+           ============================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(22, 22, 58, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 92, 252, 0.08);
+            border-radius: var(--radius-md);
+            padding: 1rem 0.8rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            background: rgba(22, 22, 58, 0.8);
+            border-color: rgba(124, 92, 252, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           LISTBOX CATÉGORIES - STYLE DARK
+           ============================================ */
+        .filter-wrapper {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-label i {
+            color: #7c5cfc;
+            margin-right: 6px;
+        }
+
+        .category-select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: rgba(22, 22, 58, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 92, 252, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: var(--transition);
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236a6a9e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            padding-right: 3rem;
+        }
+
+        .category-select option {
+            background: #111128;
+            color: var(--text-primary);
+            padding: 8px 12px;
+        }
+
+        .category-select:focus {
+            border-color: rgba(124, 92, 252, 0.4);
+            box-shadow: 0 0 30px rgba(124, 92, 252, 0.05);
+            background-color: rgba(22, 22, 58, 0.9);
+        }
+
+        .category-select:hover {
+            border-color: rgba(124, 92, 252, 0.2);
+        }
+
+        /* ============================================
+           FACT CARDS
+           ============================================ */
+        .fact-card {
+            background: rgba(22, 22, 58, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 92, 252, 0.06);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .fact-card:hover {
+            background: rgba(22, 22, 58, 0.7);
+            border-color: rgba(124, 92, 252, 0.12);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fact-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .fact-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+            flex-shrink: 0;
+            background: var(--gradient-main);
+        }
+
+        .author-avatar.alt-1 { background: var(--gradient-accent); }
+        .author-avatar.alt-2 { background: var(--gradient-success); }
+        .author-avatar.alt-3 { background: linear-gradient(135deg, #f59e0b, #f97316); }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .fact-date {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .fact-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .fact-badge {
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: rgba(124, 92, 252, 0.12);
+            color: #7c5cfc;
+        }
+
+        .fact-category {
+            background: rgba(52, 211, 153, 0.12);
+            color: #34d399;
+        }
+
+        .fact-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            border-left: 3px solid rgba(124, 92, 252, 0.3);
+            margin: 0.5rem 0;
+        }
+
+        .fact-content::before {
+            content: '💡';
+            margin-right: 10px;
+        }
+
+        .fact-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .action-btn.like-btn {
+            border-color: rgba(244, 114, 182, 0.2);
+            color: #f472b6;
+        }
+
+        .action-btn.like-btn:hover,
+        .action-btn.like-btn.liked {
+            background: var(--gradient-accent);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(244, 114, 182, 0.3);
+        }
+
+        .action-btn.share-btn {
+            border-color: rgba(52, 211, 153, 0.2);
+            color: #34d399;
+        }
+
+        .action-btn.share-btn:hover {
+            background: var(--gradient-success);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.3);
+        }
+
+        /* ============================================
+           FAB BUTTON
+           ============================================ */
+        .fab {
+            position: fixed !important;
+            bottom: 130px !important;
+            right: 28px !important;
+            width: 68px !important;
+            height: 68px !important;
+            border-radius: 50% !important;
+            background: var(--gradient-main) !important;
+            border: none !important;
+            color: white !important;
+            font-size: 1.8rem !important;
+            cursor: pointer !important;
+            box-shadow: 0 8px 40px rgba(124, 92, 252, 0.5) !important;
+            transition: var(--transition) !important;
+            z-index: 9999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            pointer-events: auto !important;
+            touch-action: manipulation !important;
+        }
+
+        .fab::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            opacity: 0.3;
+            filter: blur(20px);
+            z-index: -1;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .fab:hover {
+            transform: scale(1.1) !important;
+            box-shadow: 0 12px 50px rgba(124, 92, 252, 0.6) !important;
+        }
+
+        .fab:active {
+            transform: scale(0.95) !important;
+        }
+
+        /* ============================================
+           SUBMIT MODAL - PLEIN ÉCRAN
+           ============================================ */
+        .submit-modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(10, 10, 26, 0.95) !important;
+            backdrop-filter: blur(30px) !important;
+            -webkit-backdrop-filter: blur(30px) !important;
+            z-index: 99999 !important;
+            overflow-y: auto !important;
+            display: none;
+            padding: 0 !important;
+        }
+
+        .submit-modal.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            animation: modalIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-container {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(124, 92, 252, 0.1);
+            border-radius: var(--radius-lg);
+            max-width: 640px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            margin: 1rem;
+        }
+
+        .modal-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-container::-webkit-scrollbar-thumb {
+            background: rgba(124, 92, 252, 0.3);
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(124, 92, 252, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: var(--bg-secondary);
+            z-index: 10;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .modal-header h2 i {
+            color: #7c5cfc;
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-intro .icon-wrap {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.2rem;
+            color: white;
+            box-shadow: 0 8px 30px rgba(124, 92, 252, 0.3);
+        }
+
+        .modal-intro h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-intro p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-label i {
+            color: #7c5cfc;
+            margin-right: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(124, 92, 252, 0.1);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: rgba(124, 92, 252, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 30px rgba(124, 92, 252, 0.03);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        textarea.form-input {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        /* LISTBOX DANS LA MODALE - STYLE DARK */
+        .modal-select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: rgba(22, 22, 58, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 92, 252, 0.15);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: var(--transition);
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236a6a9e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            padding-right: 3rem;
+        }
+
+        .modal-select option {
+            background: #0d0d24;
+            color: var(--text-primary);
+            padding: 10px 14px;
+        }
+
+        .modal-select option:hover {
+            background: rgba(124, 92, 252, 0.2);
+        }
+
+        .modal-select:focus {
+            border-color: rgba(124, 92, 252, 0.4);
+            box-shadow: 0 0 30px rgba(124, 92, 252, 0.05);
+            background-color: rgba(22, 22, 58, 0.95);
+        }
+
+        .modal-select:hover {
+            border-color: rgba(124, 92, 252, 0.25);
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 92, 252, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ============================================
+           SHARE MODAL
+           ============================================ */
+        .share-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 99998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .share-modal.active {
+            display: flex;
+            animation: modalIn 0.3s ease;
+        }
+
+        .share-content {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(124, 92, 252, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+        }
+
+        .share-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .share-close:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+        }
+
+        .share-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .share-title i {
+            color: #7c5cfc;
+        }
+
+        .share-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .share-preview {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(124, 92, 252, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            max-height: 100px;
+            overflow-y: auto;
+            color: var(--text-secondary);
+        }
+
+        .share-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+        }
+
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 0.6rem 0.2rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
+            transition: var(--transition);
+        }
+
+        .share-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .share-option-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .share-whatsapp .share-option-icon { background: #25D366; }
+        .share-facebook .share-option-icon { background: #1877F2; }
+        .share-twitter .share-option-icon { background: #1DA1F2; }
+        .share-telegram .share-option-icon { background: #0088CC; }
+        .share-linkedin .share-option-icon { background: #0A66C2; }
+        .share-instagram .share-option-icon { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
+        .share-email .share-option-icon { background: #EA4335; }
+        .share-copy .share-option-icon { background: #7c5cfc; }
+        .share-native .share-option-icon { background: #34d399; }
+
+        .share-option-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .app-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: rgba(10, 10, 26, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(124, 92, 252, 0.06);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            gap: 6px;
+        }
+
+        .footer-creator {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .footer-creator .highlight {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-btn.whatsapp { background: #25D366; }
+        .social-btn.sms { background: #3B82F6; }
+        .social-btn.call { background: #10B981; }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ============================================
+           LOADING & EMPTY STATES
+           ============================================ */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 1rem;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(124, 92, 252, 0.1);
+            border-top: 3px solid #7c5cfc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .empty-state i {
+            font-size: 3.5rem;
+            color: var(--text-muted);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           CONFETTI CANVAS
+           ============================================ */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999999;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 0 1.2rem;
+                height: 70px;
+            }
+            body {
+                padding-top: 70px;
+            }
+            .header-title {
+                font-size: 1rem;
+            }
+            .header-subtitle {
+                display: none;
+            }
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .stat-number {
+                font-size: 1.3rem;
+            }
+            .main-content {
+                padding: 0 1rem;
+            }
+            .modal-body {
+                padding: 1.5rem;
+            }
+            .modal-container {
+                max-width: 95%;
+                max-height: 95vh;
+            }
+            .share-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            }
+            .fab {
+                width: 60px !important;
+                height: 60px !important;
+                bottom: 120px !important;
+                right: 20px !important;
+                font-size: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.3rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .stat-card {
+                padding: 0.6rem 0.4rem;
+            }
+            .stat-number {
+                font-size: 1.1rem;
+            }
+            .fact-card {
+                padding: 1rem;
+            }
+            .fact-content {
+                font-size: 0.9rem;
+                padding-left: 0.5rem;
+            }
+            .modal-container {
+                max-width: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+                margin: 0;
+                width: 100%;
+            }
+            .modal-header {
+                padding: 1rem 1.2rem;
+            }
+            .modal-body {
+                padding: 1.2rem;
+            }
+            .fab {
+                width: 54px !important;
+                height: 54px !important;
+                bottom: 110px !important;
+                right: 16px !important;
+                font-size: 1.3rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         PARTICULES D'ARRIÈRE-PLAN
+         ============================================ -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <header class="app-header" id="app-header">
+        <div class="header-brand">
+            <div class="header-logo">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div>
+                <div class="header-title">Saviez-vous que...?</div>
+                <div class="header-subtitle">La connaissance partagée</div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="header-btn" id="random-btn-header" title="Fait aléatoire">
+                <i class="fas fa-dice"></i>
+            </button>
+            <button class="header-btn" id="refresh-btn" title="Actualiser">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <main class="main-content">
+
+        <!-- HERO -->
+        <section class="hero-section">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                Découvrez, apprenez, partagez
+            </div>
+            <h1 class="hero-title">
+                Saviez-vous <span>que...?</span>
+            </h1>
+            <p class="hero-subtitle">
+                Une collection de faits surprenants partagés par la communauté
+            </p>
+        </section>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-facts">0</div>
+                <div class="stat-label">Faits</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-authors">0</div>
+                <div class="stat-label">Auteurs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-likes">0</div>
+                <div class="stat-label">Likes</div>
+            </div>
+        </div>
+
+        <!-- LISTBOX CATÉGORIES - STYLE DARK -->
+        <div class="filter-wrapper">
+            <label class="filter-label">
+                <i class="fas fa-tag"></i> Filtrer par catégorie
+            </label>
+            <select class="category-select" id="category-filter">
+                <option value="all">✨ Toutes les catégories</option>
+                <option value="Science">🔬 Science</option>
+                <option value="Nature">🌿 Nature</option>
+                <option value="Histoire">📜 Histoire</option>
+                <option value="Technologie">💻 Technologie</option>
+                <option value="Corps humain">🫀 Corps humain</option>
+                <option value="Animaux">🐾 Animaux</option>
+                <option value="Espace">🚀 Espace</option>
+                <option value="Sport">⚽ Sport</option>
+                <option value="Culture">🎭 Culture</option>
+                <option value="Cuisine">🍳 Cuisine</option>
+                <option value="Autre">✨ Autre</option>
+            </select>
+        </div>
+
+        <!-- FACTS CONTAINER -->
+        <div id="facts-container">
+            <div class="loading-container" id="loading">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Chargement des faits...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============================================
+         FAB BUTTON
+         ============================================ -->
+    <button class="fab" id="fab-btn" type="button" aria-label="Ajouter un fait">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- ============================================
+         SUBMIT MODAL - PLEIN ÉCRAN
+         ============================================ -->
+    <div class="submit-modal" id="submit-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2><i class="fas fa-feather-alt"></i> Nouveau fait</h2>
+                <button class="modal-close" id="close-submit" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-intro">
+                    <div class="icon-wrap">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>Partagez votre savoir</h3>
+                    <p>Ajoutez un fait intéressant que vous connaissez</p>
+                </div>
+
+                <form id="fact-form">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-user"></i> Votre nom</label>
+                        <input type="text" class="form-input" id="input-author" placeholder="Ex: Ahmed, Sara..." required maxlength="30">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-lightbulb"></i> Le fait</label>
+                        <textarea class="form-input" id="input-content" placeholder="Saviez-vous que..." required maxlength="500"></textarea>
+                        <div class="char-count"><span id="char-count">0</span> / 500</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-tag"></i> Catégorie</label>
+                        <!-- LISTBOX DANS LA MODALE - STYLE DARK -->
+                        <select class="modal-select" id="input-category">
+                            <option value="Science">🔬 Science</option>
+                            <option value="Nature">🌿 Nature</option>
+                            <option value="Histoire">📜 Histoire</option>
+                            <option value="Technologie">💻 Technologie</option>
+                            <option value="Corps humain">🫀 Corps humain</option>
+                            <option value="Animaux">🐾 Animaux</option>
+                            <option value="Espace">🚀 Espace</option>
+                            <option value="Sport">⚽ Sport</option>
+                            <option value="Culture">🎭 Culture</option>
+                            <option value="Cuisine">🍳 Cuisine</option>
+                            <option value="Autre">✨ Autre</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Publier
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SHARE MODAL
+         ============================================ -->
+    <div class="share-modal" id="share-modal">
+        <div class="share-content">
+            <button class="share-close" id="share-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="share-title">
+                <i class="fas fa-share-alt"></i> Partager
+            </div>
+            <p class="share-subtitle">Choisissez une plateforme pour partager</p>
+            <div class="share-preview" id="share-preview"></div>
+            <div class="share-grid">
+                <a class="share-option share-whatsapp" id="share-whatsapp" target="_blank">
+                    <div class="share-option-icon"><i class="fab fa-whatsapp"></i></div>
+                    <span class="share-option-label">WhatsApp</span>
+                </a>
+                <a class="share-option share-facebook" id="share-facebook" target="_blank">
+                    <div class="share-option-icon"><i class="fab fa-facebook-f"></i></div>
+                    <span class="share-option-label">Facebook</span>
+                </a>
+                <a class="share-option share-twitter" id="share-twitter" target="_blank">
+                    <div class="share-option-icon"><i class="fab fa-twitter"></i></div>
+                    <span class="share-option-label">Twitter</span>
+                </a>
+                <a class="share-option share-telegram" id="share-telegram" target="_blank">
+                    <div class="share-option-icon"><i class="fab fa-telegram-plane"></i></div>
+                    <span class="share-option-label">Telegram</span>
+                </a>
+                <a class="share-option share-linkedin" id="share-linkedin" target="_blank">
+                    <div class="share-option-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <span class="share-option-label">LinkedIn</span>
+                </a>
+                <a class="share-option share-instagram" id="share-instagram">
+                    <div class="share-option-icon"><i class="fab fa-instagram"></i></div>
+                    <span class="share-option-label">Instagram</span>
+                </a>
+                <a class="share-option share-email" id="share-email">
+                    <div class="share-option-icon"><i class="fas fa-envelope"></i></div>
+                    <span class="share-option-label">Email</span>
+                </a>
+                <a class="share-option share-copy" id="share-copy">
+                    <div class="share-option-icon"><i class="fas fa-copy"></i></div>
+                    <span class="share-option-label">Copier</span>
+                </a>
+                <a class="share-option share-native" id="share-native">
+                    <div class="share-option-icon"><i class="fas fa-share"></i></div>
+                    <span class="share-option-label">Plus...</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="app-footer">
+        <div class="footer-creator">
+            Créé par <span class="highlight">M.Seddik ELIdrissi</span>
+        </div>
+        <div class="footer-socials">
+            <a href="https://wa.me/212608975435" target="_blank" class="social-btn whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="sms:+212608975435" class="social-btn sms">
+                <i class="fas fa-comment-sms"></i>
+            </a>
+            <a href="tel:+212608975435" class="social-btn call">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        // ============================================
+        // ⚙️ CONFIGURATION
+        // ============================================
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzathq0A-xAMPvBBHg5AfVDVLe7hwSyjXluSxjdtFObfd8caOuejWdWHuXxKriLwR4fQw/exec';
+        
+        let allFacts = [];
+        let userLikes = JSON.parse(localStorage.getItem('user-likes') || '[]');
+        let currentFilter = 'all';
+
+        // DOM
+        const factsContainer = document.getElementById('facts-container');
+        const loadingEl = document.getElementById('loading');
+        const categoryFilter = document.getElementById('category-filter');
+        const factForm = document.getElementById('fact-form');
+        const inputAuthor = document.getElementById('input-author');
+        const inputContent = document.getElementById('input-content');
+        const inputCategory = document.getElementById('input-category');
+        const submitBtn = document.getElementById('submit-btn');
+        const charCount = document.getElementById('char-count');
+        const shareModal = document.getElementById('share-modal');
+        const shareClose = document.getElementById('share-close');
+        const sharePreview = document.getElementById('share-preview');
+        const submitModal = document.getElementById('submit-modal');
+        const closeSubmit = document.getElementById('close-submit');
+        const fabBtn = document.getElementById('fab-btn');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const header = document.getElementById('app-header');
+
+        // ============================================
+        // MODAL CONTROLS
+        // ============================================
+        function openSubmitModal() {
+            submitModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSubmitModal() {
+            submitModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        fabBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openSubmitModal();
+        });
+
+        closeSubmit.addEventListener('click', closeSubmitModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (submitModal.classList.contains('active')) closeSubmitModal();
+                if (shareModal.classList.contains('active')) closeShareModal();
+            }
+        });
+
+        // ============================================
+        // FORMAT DATE
+        // ============================================
+        function formatDate(dateValue) {
+            if (!dateValue) return 'Récemment';
+            if (typeof dateValue === 'string' && /^\d{2}\/\d{2}\/\d{4}$/.test(dateValue)) return dateValue;
+            
+            let date;
+            try { date = new Date(dateValue); } catch (e) { return 'Récemment'; }
+            if (isNaN(date.getTime())) return 'Récemment';
+            
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        // ============================================
+        // HEADER SCROLL
+        // ============================================
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // ============================================
+        // SHUFFLE
+        // ============================================
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // ============================================
+        // LOAD FACTS
+        // ============================================
+        async function loadFacts(showLoader = true) {
+            try {
+                if (showLoader) loadingEl.style.display = 'flex';
+                refreshBtn.classList.add('refreshing');
+                
+                const response = await fetch(APPS_SCRIPT_URL);
+                const data = await response.json();
+                allFacts = data;
+                renderFacts();
+                updateStats();
+            } catch (error) {
+                console.error('Error:', error);
+                loadingEl.style.display = 'none';
+                allFacts = getDemoData();
+                renderFacts();
+                updateStats();
+            } finally {
+                refreshBtn.classList.remove('refreshing');
+            }
+        }
+
+        function getDemoData() {
+            return [
+                { id: 1, auteur: "Amine", contenu: "Les abeilles peuvent reconnaître les visages humains.", date: "2026-06-24T10:00:00.000Z", likes: 12, categorie: "Animaux" },
+                { id: 2, auteur: "Sara", contenu: "Le miel ne périme jamais.", date: "2026-06-24T12:00:00.000Z", likes: 45, categorie: "Histoire" },
+                { id: 3, auteur: "Youssef", contenu: "Votre cerveau génère 70 000 pensées par jour.", date: "2026-06-23T23:00:00.000Z", likes: 28, categorie: "Corps humain" },
+                { id: 4, auteur: "Khadija", contenu: "Les dauphins dorment avec un œil ouvert.", date: "2026-06-23T15:00:00.000Z", likes: 33, categorie: "Animaux" },
+                { id: 5, auteur: "Omar", contenu: "Lionel Messi a marqué plus de 800 buts !", date: "2026-06-22T20:00:00.000Z", likes: 87, categorie: "Sport" }
+            ];
+        }
+
+        // ============================================
+        // RENDER FACTS
+        // ============================================
+        function renderFacts() {
+            loadingEl.style.display = 'none';
+            
+            let filteredFacts = allFacts;
+            if (currentFilter !== 'all') {
+                filteredFacts = filteredFacts.filter(f => (f.categorie || '') === currentFilter);
+            }
+            
+            if (filteredFacts.length === 0) {
+                factsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Aucun fait trouvé dans cette catégorie</h3>
+                    </div>
+                `;
+                return;
+            }
+
+            const shuffledFacts = shuffleArray(filteredFacts);
+            const categoryEmojis = {
+                'Science': '🔬', 'Nature': '🌿', 'Histoire': '📜',
+                'Technologie': '💻', 'Corps humain': '🫀', 'Animaux': '🐾',
+                'Espace': '🚀', 'Sport': '⚽', 'Culture': '🎭',
+                'Cuisine': '🍳', 'Autre': '✨'
+            };
+
+            factsContainer.innerHTML = shuffledFacts.map((fact, index) => {
+                const isLiked = userLikes.includes(Number(fact.id));
+                const likesCount = fact.likes || 0;
+                const catEmoji = categoryEmojis[fact.categorie] || '✨';
+                const avatarClass = ['', 'alt-1', 'alt-2', 'alt-3'][index % 3 + 1];
+                
+                return `
+                    <div class="fact-card" style="animation-delay: ${index * 0.06}s">
+                        <div class="fact-card-header">
+                            <div class="fact-author">
+                                <div class="author-avatar ${avatarClass}">
+                                    ${fact.auteur ? fact.auteur.charAt(0).toUpperCase() : '?'}
+                                </div>
+                                <div>
+                                    <div class="author-name">${escapeHtml(fact.auteur || 'Anonyme')}</div>
+                                    <div class="fact-date"><i class="far fa-calendar-alt"></i> ${formatDate(fact.date)}</div>
+                                </div>
+                            </div>
+                            <div class="fact-badges">
+                                <span class="fact-badge">💡 SVQ</span>
+                                ${fact.categorie ? `<span class="fact-badge fact-category">${catEmoji} ${fact.categorie}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="fact-content">${escapeHtml(fact.contenu)}</div>
+                        <div class="fact-actions">
+                            <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${fact.id}, this)">
+                                <i class="${isLiked ? 'fas' : 'far'} fa-heart"></i>
+                                <span class="like-count">${likesCount}</span>
+                            </button>
+                            <button class="action-btn share-btn" onclick="openShareModal(${fact.id})">
+                                <i class="fas fa-share-alt"></i> Partager
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ============================================
+        // FILTER CATEGORY - LISTBOX
+        // ============================================
+        categoryFilter.addEventListener('change', (e) => {
+            currentFilter = e.target.value;
+            renderFacts();
+        });
+
+        // ============================================
+        // CHAR COUNT
+        // ============================================
+        inputContent.addEventListener('input', () => {
+            charCount.textContent = inputContent.value.length;
+        });
+
+        // ============================================
+        // SUBMIT FORM
+        // ============================================
+        factForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const author = inputAuthor.value.trim();
+            const content = inputContent.value.trim();
+            const category = inputCategory.value;
+            
+            if (!author || !content) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Champs requis',
+                    text: 'Veuillez remplir tous les champs',
+                    background: '#111128',
+                    color: '#ffffff',
+                    confirmButtonColor: '#7c5cfc',
+                });
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        auteur: author,
+                        contenu: content,
+                        categorie: category,
+                        date: new Date().toISOString(),
+                        likes: 0
+                    })
+                });
+
+                launchConfetti();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Publié ! 🎉',
+                    text: 'Votre fait a été ajouté avec succès',
+                    background: '#111128',
+                    color: '#ffffff',
+                    confirmButtonColor: '#7c5cfc',
+                    timer: 2500,
+                    showConfirmButton: false
+                });
+
+                factForm.reset();
+                charCount.textContent = '0';
+                
+                setTimeout(() => {
+                    closeSubmitModal();
+                    loadFacts(false);
+                }, 1500);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: 'Une erreur est survenue, réessayez plus tard',
+                    background: '#111128',
+                    color: '#ffffff',
+                    confirmButtonColor: '#7c5cfc',
+                });
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publier';
+            }
+        });
+
+        // ============================================
+        // REFRESH
+        // ============================================
+        refreshBtn.addEventListener('click', () => loadFacts(false));
+
+        // ============================================
+        // TOGGLE LIKE
+        // ============================================
+        async function toggleLike(factId, btn) {
+            const factIndex = allFacts.findIndex(f => Number(f.id) === factId);
+            if (factIndex === -1) return;
+            
+            const fact = allFacts[factIndex];
+            const likeCountEl = btn.querySelector('.like-count');
+            const iconEl = btn.querySelector('i');
+            
+            const wasLiked = userLikes.includes(Number(factId));
+            let newLikesCount = fact.likes || 0;
+            
+            if (wasLiked) {
+                userLikes = userLikes.filter(id => id !== Number(factId));
+                newLikesCount = Math.max(0, newLikesCount - 1);
+                btn.classList.remove('liked');
+                iconEl.className = 'far fa-heart';
+            } else {
+                userLikes.push(Number(factId));
+                newLikesCount += 1;
+                btn.classList.add('liked');
+                iconEl.className = 'fas fa-heart';
+            }
+            
+            fact.likes = newLikesCount;
+            likeCountEl.textContent = newLikesCount;
+            localStorage.setItem('user-likes', JSON.stringify(userLikes));
+            updateStats();
+            
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'update_likes', factId: factId, likes: newLikesCount })
+                });
+            } catch (err) { console.log('Error:', err); }
+        }
+
+        // ============================================
+        // RANDOM FACT
+        // ============================================
+        document.getElementById('random-btn-header').addEventListener('click', showRandomFact);
+
+        function showRandomFact() {
+            if (allFacts.length === 0) return;
+            const randomFact = allFacts[Math.floor(Math.random() * allFacts.length)];
+            
+            Swal.fire({
+                html: `
+                    <div style="text-align: center; padding: 0.5rem 0;">
+                        <div style="font-size: 3rem; margin-bottom: 0.8rem;">💡</div>
+                        <h3 style="background: linear-gradient(135deg, #7c5cfc, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;">Saviez-vous que...?</h3>
+                        <p style="font-size: 1.05rem; line-height: 1.8; margin: 1rem 0; color: #e0e0ff;">${escapeHtml(randomFact.contenu)}</p>
+                        <p style="color: #6a6a9e; font-size: 0.85rem;">— ${escapeHtml(randomFact.auteur)} • ${formatDate(randomFact.date)}</p>
+                    </div>
+                `,
+                background: '#111128',
+                color: '#ffffff',
+                confirmButtonColor: '#7c5cfc',
+                confirmButtonText: 'Un autre 🎲',
+                showCancelButton: true,
+                cancelButtonText: 'Fermer',
+                cancelButtonColor: '#2a2a5a',
+            }).then((result) => {
+                if (result.isConfirmed) showRandomFact();
+            });
+        }
+
+        // ============================================
+        // SHARE MODAL
+        // ============================================
+        function openShareModal(factId) {
+            const fact = allFacts.find(f => Number(f.id) === Number(factId));
+            if (!fact) return;
+
+            const shareText = `💡 Saviez-vous que...?\n\n${fact.contenu}\n\n— Partagé via Saviez-vous que...?`;
+            sharePreview.textContent = `💡 ${fact.contenu}`;
+
+            const encodedText = encodeURIComponent(shareText);
+            const pageUrl = encodeURIComponent(window.location.href);
+
+            document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedText}`;
+            document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?quote=${encodedText}`;
+            document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodedText}`;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${pageUrl}&text=${encodedText}`;
+            document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+
+            document.getElementById('share-instagram').onclick = (e) => {
+                e.preventDefault();
+                copyToClipboard(shareText, 'Copié pour Instagram !');
+            };
+
+            document.getElementById('share-email').onclick = (e) => {
+                e.preventDefault();
+                window.location.href = `mailto:?subject=${encodeURIComponent('💡 Saviez-vous que...?')}&body=${encodedText}`;
+                closeShareModal();
+            };
+
+            document.getElementById('share-copy').onclick = (e) => {
+                e.preventDefault();
+                copyToClipboard(shareText, 'Copié ! 📋');
+            };
+
+            document.getElementById('share-native').onclick = (e) => {
+                e.preventDefault();
+                if (navigator.share) {
+                    navigator.share({ title: 'Saviez-vous que...?', text: shareText });
+                    closeShareModal();
+                }
+            };
+
+            shareModal.classList.add('active');
+        }
+
+        function closeShareModal() {
+            shareModal.classList.remove('active');
+        }
+
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                closeShareModal();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Copié ! ✅',
+                    text: message,
+                    background: '#111128',
+                    color: '#ffffff',
+                    confirmButtonColor: '#7c5cfc',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            });
+        }
+
+        shareClose.addEventListener('click', closeShareModal);
+        shareModal.addEventListener('click', (e) => {
+            if (e.target === shareModal) closeShareModal();
+        });
+
+        // ============================================
+        // UPDATE STATS
+        // ============================================
+        function updateStats() {
+            document.getElementById('total-facts').textContent = allFacts.length;
+            const uniqueAuthors = [...new Set(allFacts.map(f => f.auteur))];
+            document.getElementById('total-authors').textContent = uniqueAuthors.length;
+            const totalLikes = allFacts.reduce((sum, f) => sum + (f.likes || 0), 0);
+            document.getElementById('total-likes').textContent = totalLikes;
+        }
+
+        // ============================================
+        // CONFETTI
+        // ============================================
+        function launchConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const colors = ['#7c5cfc', '#f472b6', '#34d399', '#f59e0b', '#60a5fa'];
+
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: canvas.width / 2 + (Math.random() - 0.5) * 100,
+                    y: canvas.height / 2 + (Math.random() - 0.5) * 100,
+                    vx: (Math.random() - 0.5) * 18,
+                    vy: (Math.random() - 0.5) * 18 - 6,
+                    size: Math.random() * 8 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 12,
+                    life: 120
+                });
+            }
+
+            let frame = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+                particles.forEach(p => {
+                    if (p.life > 0) {
+                        alive = true;
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.4;
+                        p.vx *= 0.99;
+                        p.rotation += p.rotationSpeed;
+                        p.life -= 1.2;
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rotation * Math.PI / 180);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = Math.min(1, p.life / 80);
+                        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+                        ctx.restore();
+                    }
+                });
+                frame++;
+                if (alive && frame < 180) requestAnimationFrame(animate);
+                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            animate();
+        }
+
+        // ============================================
+        // ESCAPE HTML
+        // ============================================
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFacts();
+        });
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('confetti-canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+
+</body>
+</html>
