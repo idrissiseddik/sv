@@ -12,7 +12,7 @@
     
     <style>
         /* ============================================
-           🌟 DESIGN MODERNE - VERSION LISTBOX
+           🌟 DESIGN MODERNE - VERSION ADMIN
            ============================================ */
         
         :root {
@@ -26,6 +26,7 @@
             --gradient-main: linear-gradient(135deg, #7c5cfc 0%, #5c3dbe 50%, #3d1f8a 100%);
             --gradient-accent: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
             --gradient-success: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             --shadow-glow: 0 0 40px rgba(124, 92, 252, 0.15);
             --border-glow: 1px solid rgba(124, 92, 252, 0.2);
             --radius-lg: 24px;
@@ -186,6 +187,23 @@
 
         .header-btn.refreshing i {
             animation: spin 0.8s linear infinite;
+        }
+
+        .header-btn.admin-btn {
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .header-btn.admin-btn:hover {
+            background: var(--gradient-danger);
+            color: white;
+            border-color: transparent;
+        }
+
+        .header-btn.admin-btn.active {
+            background: var(--gradient-danger);
+            color: white;
+            border-color: transparent;
         }
 
         @keyframes spin {
@@ -366,6 +384,7 @@
             animation: fadeUp 0.5s ease forwards;
             opacity: 0;
             transform: translateY(20px);
+            position: relative;
         }
 
         .fact-card:hover {
@@ -373,6 +392,16 @@
             border-color: rgba(124, 92, 252, 0.12);
             transform: translateY(-3px);
             box-shadow: var(--shadow-glow);
+        }
+
+        .fact-card.admin-mode {
+            border-color: rgba(239, 68, 68, 0.2);
+            background: rgba(22, 22, 58, 0.6);
+        }
+
+        .fact-card.admin-mode:hover {
+            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(22, 22, 58, 0.8);
         }
 
         @keyframes fadeUp {
@@ -447,6 +476,11 @@
             color: #34d399;
         }
 
+        .fact-id-badge {
+            background: rgba(239, 68, 68, 0.12);
+            color: #ef4444;
+        }
+
         .fact-content {
             font-size: 1rem;
             line-height: 1.8;
@@ -467,6 +501,7 @@
             margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
+            flex-wrap: wrap;
         }
 
         .action-btn {
@@ -512,6 +547,18 @@
             color: white;
             border-color: transparent;
             box-shadow: 0 4px 20px rgba(52, 211, 153, 0.3);
+        }
+
+        .action-btn.delete-btn {
+            border-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .action-btn.delete-btn:hover {
+            background: var(--gradient-danger);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
         }
 
         /* ============================================
@@ -832,6 +879,90 @@
         }
 
         /* ============================================
+           ADMIN LOGIN MODAL
+           ============================================ */
+        .admin-login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 26, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 99998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .admin-login-modal.active {
+            display: flex;
+            animation: modalIn 0.3s ease;
+        }
+
+        .admin-login-content {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .admin-login-content .lock-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--gradient-danger);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.3);
+        }
+
+        .admin-login-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .admin-login-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-login-content .form-input {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .admin-login-content .submit-btn {
+            background: var(--gradient-danger);
+        }
+
+        .admin-login-content .submit-btn:hover {
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.3);
+        }
+
+        .admin-login-content .error-msg {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .admin-login-content .error-msg.show {
+            display: block;
+        }
+
+        /* ============================================
            SHARE MODAL
            ============================================ */
         .share-modal {
@@ -843,7 +974,7 @@
             background: rgba(10, 10, 26, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            z-index: 99998;
+            z-index: 99997;
             display: none;
             align-items: center;
             justify-content: center;
@@ -1134,6 +1265,9 @@
                 right: 20px !important;
                 font-size: 1.5rem !important;
             }
+            .admin-login-content {
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1177,6 +1311,10 @@
                 right: 16px !important;
                 font-size: 1.3rem !important;
             }
+            .admin-login-content {
+                padding: 1.2rem;
+                margin: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -1214,6 +1352,9 @@
             </div>
         </div>
         <div class="header-actions">
+            <button class="header-btn admin-btn" id="admin-btn" title="Espace Admin">
+                <i class="fas fa-user-shield"></i>
+            </button>
             <button class="header-btn" id="random-btn-header" title="Fait aléatoire">
                 <i class="fas fa-dice"></i>
             </button>
@@ -1279,6 +1420,11 @@
             </select>
         </div>
 
+        <!-- ADMIN MODE INDICATOR -->
+        <div id="admin-indicator" style="display: none; text-align: center; padding: 0.5rem; margin-bottom: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: var(--radius-sm); color: #ef4444; font-weight: 600; font-size: 0.85rem;">
+            <i class="fas fa-user-shield"></i> Mode Admin actif — Les boutons de suppression sont visibles
+        </div>
+
         <!-- FACTS CONTAINER -->
         <div id="facts-container">
             <div class="loading-container" id="loading">
@@ -1295,6 +1441,27 @@
     <button class="fab" id="fab-btn" type="button" aria-label="Ajouter un fait">
         <i class="fas fa-plus"></i>
     </button>
+
+    <!-- ============================================
+         ADMIN LOGIN MODAL
+         ============================================ -->
+    <div class="admin-login-modal" id="admin-login-modal">
+        <div class="admin-login-content">
+            <div class="lock-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3>Espace Administrateur</h3>
+            <p>Entrez le mot de passe pour accéder aux outils de modération</p>
+            <input type="password" class="form-input" id="admin-password" placeholder="Mot de passe..." autocomplete="off">
+            <div class="error-msg" id="admin-error">Mot de passe incorrect</div>
+            <button class="submit-btn" id="admin-login-btn">
+                <i class="fas fa-unlock"></i> Se connecter
+            </button>
+            <button class="submit-btn" style="background: rgba(255,255,255,0.05); margin-top: 0.5rem; color: var(--text-secondary);" id="admin-cancel-btn">
+                Annuler
+            </button>
+        </div>
+    </div>
 
     <!-- ============================================
          SUBMIT MODAL - PLEIN ÉCRAN
@@ -1330,7 +1497,6 @@
 
                     <div class="form-group">
                         <label class="form-label"><i class="fas fa-tag"></i> Catégorie</label>
-                        <!-- LISTBOX DANS LA MODALE - STYLE DARK -->
                         <select class="modal-select" id="input-category">
                             <option value="Science">🔬 Science</option>
                             <option value="Nature">🌿 Nature</option>
@@ -1439,10 +1605,12 @@
         // ⚙️ CONFIGURATION
         // ============================================
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzathq0A-xAMPvBBHg5AfVDVLe7hwSyjXluSxjdtFObfd8caOuejWdWHuXxKriLwR4fQw/exec';
+        const ADMIN_PASSWORD = 'Seddik';
         
         let allFacts = [];
         let userLikes = JSON.parse(localStorage.getItem('user-likes') || '[]');
         let currentFilter = 'all';
+        let isAdminMode = false;
 
         // DOM
         const factsContainer = document.getElementById('facts-container');
@@ -1462,6 +1630,84 @@
         const fabBtn = document.getElementById('fab-btn');
         const refreshBtn = document.getElementById('refresh-btn');
         const header = document.getElementById('app-header');
+        const adminBtn = document.getElementById('admin-btn');
+        const adminLoginModal = document.getElementById('admin-login-modal');
+        const adminPassword = document.getElementById('admin-password');
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const adminCancelBtn = document.getElementById('admin-cancel-btn');
+        const adminError = document.getElementById('admin-error');
+        const adminIndicator = document.getElementById('admin-indicator');
+
+        // ============================================
+        // ADMIN LOGIC
+        // ============================================
+        function openAdminLogin() {
+            adminLoginModal.classList.add('active');
+            adminPassword.value = '';
+            adminError.classList.remove('show');
+            adminPassword.focus();
+        }
+
+        function closeAdminLogin() {
+            adminLoginModal.classList.remove('active');
+        }
+
+        function toggleAdminMode() {
+            isAdminMode = !isAdminMode;
+            if (isAdminMode) {
+                adminBtn.classList.add('active');
+                adminIndicator.style.display = 'block';
+                renderFacts();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Mode Admin activé',
+                    text: 'Vous pouvez maintenant supprimer les faits inappropriés',
+                    background: '#111128',
+                    color: '#ffffff',
+                    confirmButtonColor: '#7c5cfc',
+                    timer: 2500,
+                    showConfirmButton: false
+                });
+            } else {
+                adminBtn.classList.remove('active');
+                adminIndicator.style.display = 'none';
+                renderFacts();
+            }
+        }
+
+        adminBtn.addEventListener('click', () => {
+            if (isAdminMode) {
+                toggleAdminMode();
+            } else {
+                openAdminLogin();
+            }
+        });
+
+        adminLoginBtn.addEventListener('click', () => {
+            const password = adminPassword.value.trim();
+            if (password === ADMIN_PASSWORD) {
+                closeAdminLogin();
+                toggleAdminMode();
+            } else {
+                adminError.classList.add('show');
+                adminPassword.value = '';
+                adminPassword.focus();
+            }
+        });
+
+        adminPassword.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                adminLoginBtn.click();
+            }
+        });
+
+        adminCancelBtn.addEventListener('click', closeAdminLogin);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && adminLoginModal.classList.contains('active')) {
+                closeAdminLogin();
+            }
+        });
 
         // ============================================
         // MODAL CONTROLS
@@ -1594,9 +1840,10 @@
                 const likesCount = fact.likes || 0;
                 const catEmoji = categoryEmojis[fact.categorie] || '✨';
                 const avatarClass = ['', 'alt-1', 'alt-2', 'alt-3'][index % 3 + 1];
+                const adminClass = isAdminMode ? 'admin-mode' : '';
                 
                 return `
-                    <div class="fact-card" style="animation-delay: ${index * 0.06}s">
+                    <div class="fact-card ${adminClass}" style="animation-delay: ${index * 0.06}s">
                         <div class="fact-card-header">
                             <div class="fact-author">
                                 <div class="author-avatar ${avatarClass}">
@@ -1610,6 +1857,7 @@
                             <div class="fact-badges">
                                 <span class="fact-badge">💡 SVQ</span>
                                 ${fact.categorie ? `<span class="fact-badge fact-category">${catEmoji} ${fact.categorie}</span>` : ''}
+                                ${isAdminMode ? `<span class="fact-badge fact-id-badge">ID: ${fact.id}</span>` : ''}
                             </div>
                         </div>
                         <div class="fact-content">${escapeHtml(fact.contenu)}</div>
@@ -1621,10 +1869,83 @@
                             <button class="action-btn share-btn" onclick="openShareModal(${fact.id})">
                                 <i class="fas fa-share-alt"></i> Partager
                             </button>
+                            ${isAdminMode ? `
+                                <button class="action-btn delete-btn" onclick="deleteFact(${fact.id})">
+                                    <i class="fas fa-trash-alt"></i> Supprimer
+                                </button>
+                            ` : ''}
                         </div>
                     </div>
                 `;
             }).join('');
+        }
+
+        // ============================================
+        // DELETE FACT (ADMIN)
+        // ============================================
+        async function deleteFact(factId) {
+            const fact = allFacts.find(f => Number(f.id) === Number(factId));
+            if (!fact) return;
+
+            const result = await Swal.fire({
+                title: '⚠️ Supprimer ce fait ?',
+                html: `
+                    <p style="color: var(--text-secondary);">Êtes-vous sûr de vouloir supprimer ce fait ?</p>
+                    <div style="background: rgba(239, 68, 68, 0.05); padding: 0.8rem; border-radius: 8px; margin-top: 0.5rem; border-left: 3px solid #ef4444; text-align: left; color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong style="color: var(--text-primary);">${escapeHtml(fact.auteur)}</strong><br>
+                        ${escapeHtml(fact.contenu.substring(0, 100))}${fact.contenu.length > 100 ? '...' : ''}
+                    </div>
+                `,
+                background: '#111128',
+                color: '#ffffff',
+                confirmButtonColor: '#ef4444',
+                confirmButtonText: '<i class="fas fa-trash-alt"></i> Oui, supprimer',
+                showCancelButton: true,
+                cancelButtonText: 'Annuler',
+                cancelButtonColor: '#2a2a5a',
+                icon: 'warning',
+                iconColor: '#ef4444'
+            });
+
+            if (result.isConfirmed) {
+                try {
+                    // Supprimer localement
+                    allFacts = allFacts.filter(f => Number(f.id) !== Number(factId));
+                    renderFacts();
+                    updateStats();
+
+                    // Envoyer la suppression au serveur
+                    await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            action: 'delete_fact', 
+                            factId: factId 
+                        })
+                    });
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Supprimé ! 🗑️',
+                        text: 'Le fait a été supprimé avec succès',
+                        background: '#111128',
+                        color: '#ffffff',
+                        confirmButtonColor: '#7c5cfc',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: 'Impossible de supprimer ce fait, réessayez plus tard',
+                        background: '#111128',
+                        color: '#ffffff',
+                        confirmButtonColor: '#7c5cfc',
+                    });
+                }
+            }
         }
 
         // ============================================
