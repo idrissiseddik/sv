@@ -3,136 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة المعرفة - Le Saviez-vous ?</title>
-    
+    <title>مرحباً بك في منصة المعرفة</title>
+    <!-- Bootstrap & Fonts & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --primary-color: #2c7a7b;
-            --secondary-color: #285e61;
-            --accent-color: #f6ad55;
-            --like-color: #e53e3e;
-            --danger-color: #e53e3e;
-            --bg-light: #f7fafc;
-            --text-light: #2d3748;
-            --card-bg-light: #ffffff;
-            --bg-dark: #1a202c;
-            --text-dark: #e2e8f0;
-            --card-bg-dark: #2d3748;
-            --footer-bg-dark: #171923;
-            --transition-speed: 0.3s;
-            --footer-height: 90px;
-            --header-height: 56px;
-            --sites-bar-height: 60px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-light);
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            background: linear-gradient(145deg, #f7fafc 0%, #e6edf3 100%);
             min-height: 100vh;
-            padding-top: calc(var(--header-height) + var(--sites-bar-height));
-            padding-bottom: calc(var(--footer-height) + 20px); 
-        }
-
-        body.dark-mode { background-color: var(--bg-dark); color: var(--text-dark); }
-
-        /* ============================================= */
-        /* 🏷️ HEADER FIXE (navbar)                     */
-        /* ============================================= */
-        .navbar-custom {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1050;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: background-color var(--transition-speed);
-            height: var(--header-height);
-            padding: 0 1rem;
-        }
-        body.dark-mode .navbar-custom { background-color: rgba(26, 32, 44, 0.95); }
-        .brand-title { font-weight: 700; color: var(--primary-color); }
-
-        .admin-btn-nav {
-            font-size: 0.85rem; padding: 4px 12px; border-radius: 20px;
-            border: 1px solid var(--primary-color); color: var(--primary-color);
-            background: transparent; transition: all 0.3s; cursor: pointer;
-        }
-        .admin-btn-nav:hover, .admin-btn-nav.active { background: var(--primary-color); color: white; }
-        .admin-btn-nav.active { border-color: var(--danger-color); background: var(--danger-color); }
-
-        /* ============================================= */
-        /* 🏷️ BANDEAU "مواقع صديقة" - SLIDER SANS POINTS */
-        /* ============================================= */
-        .sites-bar {
-            position: fixed;
-            top: var(--header-height);
-            left: 0;
-            right: 0;
-            z-index: 1040;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 0 15px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            height: var(--sites-bar-height);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            border-bottom: 2px solid rgba(255,255,255,0.08);
-        }
-
-        .sites-bar .sites-title {
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
+            padding: 1.5rem;
+            direction: rtl;
             margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            flex-shrink: 0;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 0 12px 0 8px;
-            height: 100%;
-            z-index: 2;
-            letter-spacing: 0.5px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        .sites-bar .sites-title i {
-            font-size: 0.9rem;
-            color: var(--accent-color);
+        
+        /* ===== Dark Mode للصفحة بالكامل ===== */
+        body.dark-mode {
+            background: #1a202c !important;
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode #welcomePage {
+            background: #1a202c !important;
+        }
+        body.dark-mode .welcome-card {
+            background: rgba(26, 32, 44, 0.92) !important;
+            border-color: rgba(255,255,255,0.08) !important;
+            box-shadow: 0 25px 50px -10px rgba(0,0,0,0.5) !important;
+        }
+        body.dark-mode .welcome-card h1 {
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .welcome-card h1 span {
+            background: linear-gradient(135deg, #4fd1c5, #f6ad55) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        body.dark-mode .sub-message {
+            background: rgba(44, 122, 123, 0.2) !important;
+            color: #e2e8f0 !important;
+            border-color: rgba(44, 122, 123, 0.3) !important;
+        }
+        body.dark-mode .welcome-text {
+            background: rgba(0,0,0,0.3) !important;
+            color: #e2e8f0 !important;
+            border-right-color: #4fd1c5 !important;
+        }
+        body.dark-mode .footer-note {
+            color: #a0aec0 !important;
+            border-top-color: rgba(255,255,255,0.06) !important;
+        }
+        body.dark-mode .footer-note .creator-name {
+            color: #4fd1c5 !important;
+        }
+        body.dark-mode .footer-note .contact-link {
+            color: #a0aec0 !important;
+        }
+        body.dark-mode .footer-note .contact-link:hover {
+            color: #fff !important;
+        }
+        body.dark-mode .btn-primary-custom {
+            background: linear-gradient(135deg, #4fd1c5, #2c7a7b) !important;
+            box-shadow: 0 8px 20px rgba(79, 209, 197, 0.25) !important;
+        }
+        body.dark-mode .btn-primary-custom:hover {
+            background: linear-gradient(135deg, #38b2ac, #1a5c5d) !important;
+            box-shadow: 0 16px 30px rgba(79, 209, 197, 0.35) !important;
         }
 
-        /* ===== SLIDER SANS POINTS ===== */
-        .slider-container {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-
-        .slider-track {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        .slide-item {
-            position: absolute;
+        /* ===== صفحة الترحيب ===== */
+        #welcomePage {
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -140,729 +86,1263 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(145deg, #f7fafc 0%, #e6edf3 100%);
+            z-index: 9999;
+            padding: 1.5rem;
+            transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease;
+        }
+        #welcomePage.hidden {
             opacity: 0;
+            transform: scale(0.95);
             pointer-events: none;
+        }
+        
+        .welcome-card {
+            max-width: 700px;
             width: 100%;
-            height: 100%;
-        }
-
-        .slide-item.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* ===== ANIMATIONS VARIÉES ===== */
-        /* Animation 1: Zoom + Fade */
-        .slide-item.anim-1 {
-            animation: none;
-        }
-        .slide-item.anim-1.active {
-            animation: animZoomFade 0.9s ease-out forwards;
-        }
-        .slide-item.anim-1.exit {
-            animation: animZoomFadeOut 0.7s ease-in forwards;
-        }
-
-        /* Animation 2: Slide from left */
-        .slide-item.anim-2.active {
-            animation: animSlideLeft 0.8s ease-out forwards;
-        }
-        .slide-item.anim-2.exit {
-            animation: animSlideLeftOut 0.6s ease-in forwards;
-        }
-
-        /* Animation 3: Slide from right */
-        .slide-item.anim-3.active {
-            animation: animSlideRight 0.8s ease-out forwards;
-        }
-        .slide-item.anim-3.exit {
-            animation: animSlideRightOut 0.6s ease-in forwards;
-        }
-
-        /* Animation 4: Flip + Fade */
-        .slide-item.anim-4.active {
-            animation: animFlip 0.9s ease-out forwards;
-        }
-        .slide-item.anim-4.exit {
-            animation: animFlipOut 0.6s ease-in forwards;
-        }
-
-        /* Animation 5: Bounce + Fade */
-        .slide-item.anim-5.active {
-            animation: animBounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        .slide-item.anim-5.exit {
-            animation: animFadeOut 0.5s ease-in forwards;
-        }
-
-        /* Animation 6: Rotate + Scale */
-        .slide-item.anim-6.active {
-            animation: animRotateScale 0.9s ease-out forwards;
-        }
-        .slide-item.anim-6.exit {
-            animation: animRotateScaleOut 0.6s ease-in forwards;
-        }
-
-        /* Animation 7: Glitch */
-        .slide-item.anim-7.active {
-            animation: animGlitch 0.8s ease-out forwards;
-        }
-        .slide-item.anim-7.exit {
-            animation: animFadeOut 0.4s ease-in forwards;
-        }
-
-        /* Animation 8: Slide from top */
-        .slide-item.anim-8.active {
-            animation: animSlideTop 0.8s ease-out forwards;
-        }
-        .slide-item.anim-8.exit {
-            animation: animSlideTopOut 0.6s ease-in forwards;
-        }
-
-        /* ===== KEYFRAMES ===== */
-        @keyframes animZoomFade {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes animZoomFadeOut {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.3); opacity: 0; }
-        }
-
-        @keyframes animSlideLeft {
-            0% { transform: translateX(-60px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes animSlideLeftOut {
-            0% { transform: translateX(0); opacity: 1; }
-            100% { transform: translateX(60px); opacity: 0; }
-        }
-
-        @keyframes animSlideRight {
-            0% { transform: translateX(60px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes animSlideRightOut {
-            0% { transform: translateX(0); opacity: 1; }
-            100% { transform: translateX(-60px); opacity: 0; }
-        }
-
-        @keyframes animFlip {
-            0% { transform: perspective(400px) rotateY(-90deg); opacity: 0; }
-            100% { transform: perspective(400px) rotateY(0); opacity: 1; }
-        }
-        @keyframes animFlipOut {
-            0% { transform: perspective(400px) rotateY(0); opacity: 1; }
-            100% { transform: perspective(400px) rotateY(90deg); opacity: 0; }
-        }
-
-        @keyframes animBounce {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            70% { transform: scale(0.9); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes animFadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        @keyframes animRotateScale {
-            0% { transform: rotate(-10deg) scale(0.7); opacity: 0; }
-            100% { transform: rotate(0) scale(1); opacity: 1; }
-        }
-        @keyframes animRotateScaleOut {
-            0% { transform: rotate(0) scale(1); opacity: 1; }
-            100% { transform: rotate(10deg) scale(0.7); opacity: 0; }
-        }
-
-        @keyframes animGlitch {
-            0% { transform: translate(0); opacity: 0; }
-            10% { transform: translate(-5px, 2px); }
-            20% { transform: translate(5px, -2px); }
-            30% { transform: translate(-3px, 3px); }
-            40% { transform: translate(3px, -3px); }
-            50% { transform: translate(-2px, 1px); opacity: 0.7; }
-            60% { transform: translate(2px, -1px); }
-            70% { transform: translate(-4px, 2px); }
-            80% { transform: translate(4px, -2px); }
-            90% { transform: translate(-1px, 1px); }
-            100% { transform: translate(0); opacity: 1; }
-        }
-
-        @keyframes animSlideTop {
-            0% { transform: translateY(-60px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes animSlideTopOut {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(60px); opacity: 0; }
-        }
-
-        /* ===== STYLE DES LIENS (SANS CADRE) ===== */
-        .site-slide-link {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.5rem;
-            padding: 8px 20px;
-            display: inline-block;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px 48px 48px 48px;
+            padding: 2.5rem 2rem 2.8rem;
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            text-align: center;
             transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.2);
-            position: relative;
-            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: floatIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .welcome-card:hover {
+            box-shadow: 0 30px 60px -12px rgba(44, 122, 123, 0.2);
+            transform: scale(1.01);
+        }
+        @keyframes floatIn {
+            0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .icon-big {
+            font-size: 4.5rem;
+            background: linear-gradient(135deg, #2c7a7b, #285e61);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            animation: pulseGlow 2.6s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { opacity: 0.7; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1.06); }
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 2.4rem;
+            color: #1e3a3a;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
+        h1 span {
+            background: linear-gradient(135deg, #2c7a7b, #f6ad55);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sub-message {
+            font-size: 1.1rem;
+            color: #2d3748;
+            background: rgba(44, 122, 123, 0.07);
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            display: inline-block;
+            margin: 1rem auto 1.2rem;
+            border: 1px solid rgba(44, 122, 123, 0.12);
+            backdrop-filter: blur(4px);
+        }
+        .sub-message i {
+            color: #f6ad55;
+            margin-left: 8px;
+        }
+
+        .welcome-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #1e293b;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 1.2rem 1.8rem;
+            border-radius: 32px;
+            margin: 1.5rem 0 2rem;
+            border-right: 4px solid #2c7a7b;
+            text-align: justify;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+        .welcome-text i {
+            color: #f6ad55;
+            margin: 0 6px;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #2c7a7b, #205b5c);
+            border: none;
+            padding: 0.85rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(44, 122, 123, 0.25);
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
             border: none;
         }
-
-        .site-slide-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: rgba(255,255,255,0.4);
-            transition: all 0.4s ease;
+        .btn-primary-custom:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 30px rgba(44, 122, 123, 0.35);
+            background: linear-gradient(135deg, #236b6c, #1a4f50);
+            color: white;
+        }
+        .btn-primary-custom i {
+            font-size: 1.2rem;
         }
 
-        .site-slide-link:hover::after {
-            width: 80%;
+        .footer-note {
+            margin-top: 2rem;
+            color: #4a5568;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            border-top: 1px solid rgba(0,0,0,0.04);
+            padding-top: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-note .creator-name {
+            color: #2c7a7b;
+            font-weight: 700;
+        }
+        .footer-note .contact-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .footer-note .contact-link {
+            color: #4a5568;
+            opacity: 0.6;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+        .footer-note .contact-link:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        .footer-note .contact-link.whatsapp:hover { color: #25D366; background: rgba(37, 211, 102, 0.1); }
+        .footer-note .contact-link.sms:hover { color: #2c7a7b; background: rgba(44, 122, 123, 0.1); }
+        .footer-note .contact-link.phone:hover { color: #f6ad55; background: rgba(246, 173, 85, 0.1); }
+
+        /* ===== المنصة الرئيسية ===== */
+        #mainPlatform {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+        }
+        #mainPlatform.visible {
+            display: block;
         }
 
-        .site-slide-link:hover {
-            transform: scale(1.05);
-            color: #fff;
-            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        /* ===== Dark Mode للعناصر العامة ===== */
+        body.dark-mode .navbar-custom {
+            background-color: rgba(26, 32, 44, 0.98) !important;
+            border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+        }
+        body.dark-mode .brand-title {
+            color: #4fd1c5 !important;
+        }
+        body.dark-mode .sites-bar {
+            background: linear-gradient(135deg, #1a5c5d, #0d3a3b) !important;
+        }
+        body.dark-mode .admin-btn-nav {
+            color: #4fd1c5 !important;
+            border-color: #4fd1c5 !important;
+        }
+        body.dark-mode .admin-btn-nav:hover,
+        body.dark-mode .admin-btn-nav.active {
+            background: #4fd1c5 !important;
+            color: #1a202c !important;
+        }
+        body.dark-mode .fixed-footer {
+            background-color: rgba(26, 32, 44, 0.98) !important;
+            border-top: 1px solid rgba(255,255,255,0.05) !important;
+        }
+        body.dark-mode .fixed-footer .footer-text {
+            color: #a0aec0 !important;
+        }
+        body.dark-mode .fixed-footer .creator-name {
+            color: #4fd1c5 !important;
+        }
+        body.dark-mode .fixed-footer .contact-link {
+            color: #a0aec0 !important;
+        }
+        body.dark-mode .fixed-footer .contact-link:hover {
+            color: #fff !important;
+        }
+        body.dark-mode .hero-section h2 {
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .hero-section p {
+            color: #a0aec0 !important;
+        }
+        body.dark-mode .fact-card {
+            background-color: #2d3748 !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important;
+            color: #e2e8f0 !important;
+        }
+        body.dark-mode .fact-header {
+            color: #4fd1c5 !important;
+        }
+        body.dark-mode .btn-like {
+            color: #a0aec0 !important;
+        }
+        body.dark-mode .btn-like:hover {
+            background-color: rgba(79, 209, 197, 0.1) !important;
+        }
+        body.dark-mode .btn-like.liked {
+            color: #fc8181 !important;
+        }
+        body.dark-mode .btn-delete {
+            background: rgba(252, 129, 129, 0.15) !important;
+            color: #fc8181 !important;
+        }
+        body.dark-mode .btn-delete:hover {
+            background: #fc8181 !important;
+            color: #1a202c !important;
+        }
+        body.dark-mode .fab-btn {
+            background: linear-gradient(135deg, #4fd1c5, #2c7a7b) !important;
+            box-shadow: 0 4px 15px rgba(79, 209, 197, 0.4) !important;
+        }
+        body.dark-mode .fab-btn:hover {
+            background: linear-gradient(135deg, #38b2ac, #1a5c5d) !important;
         }
 
-        /* Adaptation pour mobile */
-        @media (max-width: 768px) {
-            :root {
-                --sites-bar-height: 55px;
-            }
-            .sites-bar {
-                padding: 0 10px;
-            }
-            .sites-bar .sites-title {
-                font-size: 0.75rem;
-                padding: 0 8px 0 4px;
-            }
-            .sites-bar .sites-title i {
-                font-size: 0.7rem;
-            }
-            .site-slide-link {
-                font-size: 1.1rem;
-                padding: 4px 12px;
-            }
-            body {
-                padding-top: calc(var(--header-height) + var(--sites-bar-height) + 5px);
-            }
-        }
-
+        /* responsive */
         @media (max-width: 480px) {
-            :root {
-                --sites-bar-height: 48px;
-            }
-            .site-slide-link {
-                font-size: 0.9rem;
-                padding: 3px 10px;
-            }
-            .sites-bar .sites-title {
-                font-size: 0.65rem;
-            }
+            .welcome-card { padding: 1.8rem 1rem 2rem; }
+            h1 { font-size: 1.8rem; }
+            .welcome-text { font-size: 1rem; padding: 0.8rem 1rem; }
+            .btn-primary-custom { padding: 0.7rem 2rem; font-size: 1rem; }
+            .icon-big { font-size: 3.2rem; }
         }
-
-        /* ===== RESTE DU STYLE ===== */
-        .hero-section { 
-            padding: 1rem 1rem 0.5rem; 
-            text-align: center; 
-            animation: fadeInDown 0.8s ease-out; 
-        }
-        .hero-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 0.3rem; animation: pulse 2s infinite; }
-
-        .facts-container { max-width: 800px; margin: 0 auto; padding: 0 1rem; }
-
-        .fact-card {
-            background-color: var(--card-bg-light); border: none; border-radius: 15px;
-            padding: 1.5rem; margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s, background-color var(--transition-speed);
-            animation: fadeInUp 0.5s ease-out backwards; position: relative;
-        }
-        body.dark-mode .fact-card { background-color: var(--card-bg-dark); box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        body.admin-mode .fact-card { border: 2px dashed var(--danger-color); }
-
-        .fact-header { display: flex; align-items: center; margin-bottom: 1rem; color: var(--primary-color); font-weight: bold; font-size: 1.1rem; }
-        .fact-header i { margin-left: 0.5rem; }
-        .fact-content { font-size: 1.1rem; line-height: 1.6; }
-
-        .card-actions { margin-top: 1rem; display: flex; justify-content: flex-end; gap: 15px; align-items: center; }
-
-        .btn-like {
-            border: none; background: transparent; color: var(--text-light); opacity: 0.7;
-            transition: all 0.3s ease; cursor: pointer; font-size: 1.1rem;
-            display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 20px;
-        }
-        body.dark-mode .btn-like { color: var(--text-dark); }
-        .btn-like:hover { opacity: 1; background-color: rgba(229, 62, 62, 0.1); }
-        .btn-like.liked { color: var(--like-color); opacity: 1; font-weight: bold; }
-        .btn-like.liked i { animation: likePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .like-count { font-size: 0.95rem; font-weight: 600; }
-
-        .btn-delete {
-            border: none; background: rgba(229, 62, 62, 0.1); color: var(--danger-color);
-            width: 36px; height: 36px; border-radius: 50%; display: none;
-            align-items: center; justify-content: center; cursor: pointer;
-            transition: all 0.3s ease; font-size: 1rem;
-        }
-        .btn-delete:hover { background: var(--danger-color); color: white; transform: scale(1.1); }
-        body.admin-mode .btn-delete { display: flex; }
-
-        .loading-overlay {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.3); z-index: 9999;
-            align-items: center; justify-content: center; backdrop-filter: blur(3px);
-        }
-        .loading-overlay.show { display: flex; }
-        .spinner-border-lg { width: 3rem; height: 3rem; color: var(--primary-color); }
-
-        .fixed-footer {
-            position: fixed; bottom: 0; left: 0; right: 0; height: var(--footer-height);
-            background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 900; transition: background-color var(--transition-speed); gap: 8px;
-        }
-        body.dark-mode .fixed-footer { background-color: var(--footer-bg-dark); border-top: 1px solid rgba(255,255,255,0.05); }
-        .footer-text { font-size: 0.85rem; font-weight: 500; margin: 0; }
-        .creator-name { color: var(--primary-color); font-weight: 700; }
-
-        .contact-row { display: flex; gap: 20px; align-items: center; }
-        .contact-link {
-            color: var(--text-light); opacity: 0.6; font-size: 1rem; transition: all 0.3s ease;
-            text-decoration: none; display: flex; align-items: center; justify-content: center;
-            width: 32px; height: 32px; border-radius: 50%;
-        }
-        body.dark-mode .contact-link { color: var(--text-dark); }
-        .contact-link:hover { opacity: 1; transform: translateY(-2px); }
-        .contact-link.whatsapp:hover { color: #25D366; background: rgba(37, 211, 102, 0.1); }
-        .contact-link.sms:hover { color: var(--primary-color); background: rgba(44, 122, 123, 0.1); }
-        .contact-link.phone:hover { color: var(--accent-color); background: rgba(246, 173, 85, 0.1); }
-
-        .fab-container { position: fixed; bottom: calc(var(--footer-height) + 20px); left: 20px; z-index: 1000; }
-        .fab-btn {
-            width: 55px; height: 55px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white; border: none; box-shadow: 0 4px 15px rgba(44, 122, 123, 0.4);
-            display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
-        }
-        .fab-btn:hover { transform: scale(1.1) rotate(90deg); }
-
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        @keyframes likePop { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 3px; }
     </style>
 </head>
 <body>
 
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner-border spinner-border-lg" role="status"></div>
-    </div>
+    <!-- ===== صفحة الترحيب ===== -->
+    <div id="welcomePage">
+        <div class="welcome-card">
+            <div class="icon-big">
+                <i class="fa-regular fa-hand-peace"></i>
+            </div>
 
-    <!-- ============================================= -->
-    <!-- 🏷️ HEADER FIXE (navbar)                     -->
-    <!-- ============================================= -->
-    <nav class="navbar-custom d-flex align-items-center">
-        <div class="container d-flex justify-content-between align-items-center">
-            <span class="navbar-brand brand-title mb-0 h1">
-                <i class="fa-solid fa-lightbulb ms-2"></i>منصة المعرفة
-            </span>
-            <div class="d-flex align-items-center gap-2">
-                <button id="adminToggle" class="admin-btn-nav">
-                    <i class="fa-solid fa-user-shield ms-1"></i> Admin
-                </button>
-                <button id="themeToggle" class="btn btn-link text-decoration-none">
-                    <i class="fa-solid fa-moon fs-5"></i>
-                </button>
+            <h1>
+                <span>منصة المعرفة</span>
+            </h1>
+            <div class="sub-message">
+                <i class="fa-regular fa-lightbulb"></i>   هل تعلم أن ... ؟
+            </div>
+
+            <div class="welcome-text">
+                <i class="fa-regular fa-comment-dots"></i>
+                أهلاً بك في فضاء المعرفة المشتركة!
+                <br>
+                ندعوك للمشاركة بمعلومة مفيدة، وطرح سؤال، أو إضافة معلومة جديدة تفيد الجميع.
+                <i class="fa-regular fa-face-smile"></i>
+                <br>
+                <span style="display:inline-block; margin-top:6px; font-weight:600; color:#2c7a7b;">
+                    <i class="fa-regular fa-hand-point-left"></i>  كن جزءاً من هذه الرحلة المعرفية !
+                </span>
+            </div>
+
+            <button id="enterBtn" class="btn-primary-custom">
+                <i class="fa-regular fa-circle-check"></i>  تفضل بالدخول
+            </button>
+
+            <div class="footer-note">
+                <p style="margin:0; font-size:0.85rem;">إنشاء و تصميم : <span class="creator-name">م.الصديق الإدريسي</span></p>
+                <div class="contact-row">
+                    <a href="https://wa.me/212608975435" target="_blank" class="contact-link whatsapp" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="sms:+212608975435" class="contact-link sms" title="رسالة نصية"><i class="fa-solid fa-comment-sms"></i></a>
+                    <a href="tel:+212608975435" class="contact-link phone" title="اتصال"><i class="fa-solid fa-phone"></i></a>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <!-- ============================================= -->
-    <!-- 🏷️ BANDEAU "مواقع صديقة" - SLIDER SANS POINTS -->
-    <!-- ============================================= -->
-    <div class="sites-bar">
-        <span class="sites-title">
-            <i class="fa-solid fa-link"></i> مواقع صديقة :
-        </span>
-        <div class="slider-container">
-            <div class="slider-track" id="sliderTrack">
-                <!-- Les slides sont générés par JavaScript -->
-            </div>
-        </div>
     </div>
 
-    <header class="hero-section">
-        <div class="hero-icon"><i class="fa-solid fa-brain"></i></div>
-        <h2 class="fw-bold mb-2">هل تعلم أن...؟</h2>
-        <p class="opacity-75 mb-0">شاركنا معلومة مفيدة واكتشف عجائب العالم</p>
-    </header>
-
-    <main class="facts-container" id="factsList"></main>
-
-    <div class="fab-container">
-        <button class="fab-btn" id="addFactBtn" title="أضف معلومة جديدة">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <footer class="fixed-footer">
-        <p class="footer-text">إنشاء و تصميم : <span class="creator-name">م.الصديق الإدريسي</span></p>
-        <div class="contact-row">
-            <a href="https://wa.me/212608975435" target="_blank" class="contact-link whatsapp" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="sms:+212608975435" class="contact-link sms" title="رسالة نصية"><i class="fa-solid fa-comment-sms"></i></a>
-            <a href="tel:+212608975435" class="contact-link phone" title="اتصال"><i class="fa-solid fa-phone"></i></a>
-        </div>
-    </footer>
+    <!-- ===== المنصة الرئيسية (سيتم تحميلها ديناميكياً) ===== -->
+    <div id="mainPlatform"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // =============================================
-        // ⚙️ CONFIGURATION
-        // =============================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOf0tmqkwYTX4gK83_DznXpyQfhyItbOQo1T-IKXIh3FuWjyNKIiFoJo_ltojDjcBY/exec';
-        const ADMIN_PASSWORD = "Seddik";
+        (function() {
+            "use strict";
 
-        // =============================================
-        // 📋 LISTE DES SITES (AJOUTE ICI TES LIENS)
-        // =============================================
-        const SITES = [
-            { name: 'راديو القرآن الكريم', url: 'https://radiocoran.vercel.app' },
-            { name: 'تلاوة القرآن الكريم', url: 'https://tilawatquran.vercel.app' },
-            { name: 'آية كل يوم لعلها تكون رسالة', url: 'https://ayatoday.vercel.app' },
-        ];
+            // =============================================
+            // 📦 عناصر DOM
+            // =============================================
+            const welcomePage = document.getElementById('welcomePage');
+            const mainPlatform = document.getElementById('mainPlatform');
+            const enterBtn = document.getElementById('enterBtn');
 
-        // =============================================
-        // 🎠 SLIDER AUTOMATIQUE SANS POINTS
-        // =============================================
-        let currentSlide = 0;
-        let sliderInterval = null;
-        const SLIDER_INTERVAL = 3000;
-
-        // Liste des animations (chaque site aura une animation différente)
-        const ANIMATIONS = ['anim-1', 'anim-2', 'anim-3', 'anim-4', 'anim-5', 'anim-6', 'anim-7', 'anim-8'];
-
-        function buildSlider() {
-            const track = document.getElementById('sliderTrack');
-            track.innerHTML = '';
-
-            SITES.forEach((site, index) => {
-                const slide = document.createElement('div');
-                // Chaque slide reçoit une animation différente (cycle)
-                const animClass = ANIMATIONS[index % ANIMATIONS.length];
-                slide.className = `slide-item ${animClass}`;
-                if (index === 0) slide.classList.add('active');
-                slide.innerHTML = `
-                    <a href="${site.url}" target="_blank" class="site-slide-link">
-                        ${site.name}
-                    </a>
-                `;
-                track.appendChild(slide);
-            });
-
-            startAutoplay();
-        }
-
-        function goToSlide(index) {
-            const slides = document.querySelectorAll('.slide-item');
-            if (slides.length === 0) return;
-
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
-
-            // Retirer les classes actives et exit de tous les slides
-            slides.forEach(s => {
-                s.classList.remove('active', 'exit');
-            });
-
-            // Ajouter 'exit' au slide actuel (pour l'animation de sortie)
-            if (slides[currentSlide]) {
-                slides[currentSlide].classList.add('exit');
-            }
-
-            // Ajouter 'active' au nouveau slide
-            slides[index].classList.add('active');
-
-            currentSlide = index;
-        }
-
-        function nextSlide() {
-            const slides = document.querySelectorAll('.slide-item');
-            const next = (currentSlide + 1) % slides.length;
-            goToSlide(next);
-        }
-
-        function startAutoplay() {
-            if (sliderInterval) clearInterval(sliderInterval);
-            sliderInterval = setInterval(nextSlide, SLIDER_INTERVAL);
-        }
-
-        function stopAutoplay() {
-            if (sliderInterval) {
-                clearInterval(sliderInterval);
-                sliderInterval = null;
-            }
-        }
-
-        // Pause au survol
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.slider-container');
-            if (container) {
-                container.addEventListener('mouseenter', stopAutoplay);
-                container.addEventListener('mouseleave', startAutoplay);
-                container.addEventListener('touchstart', stopAutoplay);
-                container.addEventListener('touchend', startAutoplay);
-            }
-        });
-
-        // =============================================
-        // 📡 GOOGLE SHEETS API FUNCTIONS
-        // =============================================
-        let facts = [];
-        let userLikes = JSON.parse(localStorage.getItem('userLikedFacts')) || [];
-        let isAdmin = false;
-
-        const factsListEl = document.getElementById('factsList');
-        const addFactBtn = document.getElementById('addFactBtn');
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const adminToggleBtn = document.getElementById('adminToggle');
-        const body = document.body;
-        const themeIcon = themeToggleBtn.querySelector('i');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-
-        function showLoading() { loadingOverlay.classList.add('show'); }
-        function hideLoading() { loadingOverlay.classList.remove('show'); }
-
-        function shuffleArray(array) {
-            const arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
-        }
-
-        async function fetchFacts() {
-            showLoading();
-            try {
-                const response = await fetch(`${SCRIPT_URL}?action=getFacts`);
-                const data = await response.json();
-                if (data.success) {
-                    facts = data.facts.map(f => ({
-                        id: parseInt(f.id),
-                        text: f.text,
-                        likes: parseInt(f.likes) || 0
-                    }));
-                    renderFacts(true);
-                } else {
-                    Swal.fire('خطأ', data.message || 'فشل جلب البيانات', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                Swal.fire('خطأ الاتصال', 'تأكد من رابط Google Apps Script', 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        async function addFactToSheet(text) {
-            showLoading();
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'addFact', text: text })
-                });
-                await new Promise(r => setTimeout(r, 1000));
-                await fetchFacts();
-                Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'تمت الإضافة!', showConfirmButton: false, timer: 2000 });
-            } catch (err) {
-                hideLoading();
-                Swal.fire('خطأ', 'فشل إضافة المعلومة', 'error');
-            }
-        }
-
-        async function deleteFactFromSheet(factId) {
-            showLoading();
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'deleteFact', id: factId })
-                });
-                await new Promise(r => setTimeout(r, 1000));
-                await fetchFacts();
-                Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'تم الحذف', showConfirmButton: false, timer: 1500 });
-            } catch (err) {
-                hideLoading();
-                Swal.fire('خطأ', 'فشل حذف المعلومة', 'error');
-            }
-        }
-
-        async function updateLikeInSheet(factId, newLikeCount) {
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'updateLike', id: factId, likes: newLikeCount })
-            }).catch(err => console.error('Like sync failed:', err));
-        }
-
-        // =============================================
-        // 🖥️ UI FUNCTIONS
-        // =============================================
-
-        window.toggleLike = (factId) => {
-            if (isAdmin) return;
-            const factIndex = facts.findIndex(f => f.id === factId);
-            if (factIndex === -1) return;
-
-            const likeIndex = userLikes.indexOf(factId);
-            if (likeIndex === -1) {
-                facts[factIndex].likes += 1;
-                userLikes.push(factId);
-            } else {
-                facts[factIndex].likes = Math.max(0, facts[factIndex].likes - 1);
-                userLikes.splice(likeIndex, 1);
-            }
-
-            localStorage.setItem('userLikedFacts', JSON.stringify(userLikes));
-            updateLikeButtonUI(factId);
-            updateLikeInSheet(factId, facts[factIndex].likes);
-        };
-
-        function updateLikeButtonUI(factId) {
-            const fact = facts.find(f => f.id === factId);
-            if (!fact) return;
-            const btn = document.getElementById(`like-btn-${factId}`);
-            if (btn) {
-                const isLiked = userLikes.includes(factId);
-                btn.classList.toggle('liked', isLiked);
-                btn.querySelector('.like-count').textContent = fact.likes;
-                btn.querySelector('i').className = isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
-            }
-        }
-
-        window.deleteFact = (factId) => {
-            Swal.fire({
-                title: 'حذف المعلومة؟', text: 'هل أنت متأكد من حذف هذه المعلومة نهائياً؟',
-                icon: 'warning', showCancelButton: true, confirmButtonColor: '#e53e3e',
-                cancelButtonColor: '#718096', confirmButtonText: 'نعم، احذف', cancelButtonText: 'إلغاء'
-            }).then((result) => {
-                if (result.isConfirmed) deleteFactFromSheet(factId);
-            });
-        };
-
-        function renderFacts(shouldShuffle = true) {
-            factsListEl.innerHTML = '';
-            const displayFacts = shouldShuffle ? shuffleArray(facts) : facts;
-
-            displayFacts.forEach((fact, index) => {
-                const isLiked = userLikes.includes(fact.id);
-                const card = document.createElement('div');
-                card.className = 'fact-card';
-                card.style.animationDelay = `${index * 0.05}s`;
-                card.innerHTML = `
-                    <div class="fact-header">
-                        <i class="fa-solid fa-quote-right"></i>
-                        <span>هل تعلم أن...</span>
-                    </div>
-                    <div class="fact-content">${fact.text}</div>
-                    <div class="card-actions">
-                        <button class="btn-delete" onclick="deleteFact(${fact.id})" title="حذف">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                        <button id="like-btn-${fact.id}" class="btn-like ${isLiked ? 'liked' : ''}" 
-                                onclick="toggleLike(${fact.id})" title="أعجبني">
-                            <i class="${isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}"></i>
-                            <span class="like-count">${fact.likes || 0}</span>
-                        </button>
-                    </div>`;
-                factsListEl.appendChild(card);
-            });
-        }
-
-        // --- Admin Logic ---
-        adminToggleBtn.addEventListener('click', () => {
-            if (isAdmin) {
-                isAdmin = false;
-                body.classList.remove('admin-mode');
-                adminToggleBtn.classList.remove('active');
-                adminToggleBtn.innerHTML = '<i class="fa-solid fa-user-shield ms-1"></i> Admin';
-                renderFacts(false);
-                Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'تم تسجيل الخروج', showConfirmButton: false, timer: 1500 });
-            } else {
-                Swal.fire({
-                    title: 'دخول الأدمن', input: 'password', inputLabel: 'أدخل كلمة المرور',
-                    confirmButtonText: 'دخول', confirmButtonColor: '#2c7a7b', showCancelButton: true, cancelButtonText: 'إلغاء',
-                    inputValidator: (v) => !v ? 'الرجاء إدخال كلمة المرور' : v !== ADMIN_PASSWORD ? 'كلمة المرور خاطئة!' : null
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        isAdmin = true;
-                        body.classList.add('admin-mode');
-                        adminToggleBtn.classList.add('active');
-                        adminToggleBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket ms-1"></i> خروج';
-                        renderFacts(false);
-                        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'مرحباً أيها الأدمن!', showConfirmButton: false, timer: 1500 });
-                    }
-                });
-            }
-        });
-
-        // --- Add Fact ---
-        addFactBtn.addEventListener('click', () => {
-            Swal.fire({
-                title: 'شاركنا معلومة', input: 'textarea', inputLabel: 'اكتب "هل تعلم أن..." جديدة',
-                confirmButtonText: 'نشر المعلومة', confirmButtonColor: '#2c7a7b', showCancelButton: true, cancelButtonText: 'إلغاء',
-                preConfirm: (v) => (!v || !v.trim()) ? Swal.showValidationMessage('الرجاء كتابة معلومة') : v
-            }).then((result) => {
-                if (result.isConfirmed) addFactToSheet(result.value.trim());
-            });
-        });
-
-        // --- Dark Mode ---
-        function updateThemeIcon() {
-            if (body.classList.contains('dark-mode')) {
-                themeIcon.classList.replace('fa-moon', 'fa-sun'); themeIcon.style.color = '#f6ad55';
-            } else {
-                themeIcon.classList.replace('fa-sun', 'fa-moon'); themeIcon.style.color = '';
-            }
-        }
-        themeToggleBtn.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-            updateThemeIcon();
-        });
-
-        // --- Init ---
-        document.addEventListener('DOMContentLoaded', () => {
+            // =============================================
+            // 🌙 تطبيق الوضع الليلي المحفوظ
+            // =============================================
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') body.classList.add('dark-mode');
-            updateThemeIcon();
-            buildSlider();
-            fetchFacts();
-        });
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+
+            // =============================================
+            // 🚀 عرض صفحة الترحيب في كل زيارة
+            // =============================================
+            welcomePage.classList.remove('hidden');
+            welcomePage.style.display = 'flex';
+
+            // =============================================
+            // 🚪 الانتقال إلى المنصة الرئيسية
+            // =============================================
+            function goToMain() {
+                welcomePage.classList.add('hidden');
+                
+                setTimeout(() => {
+                    welcomePage.style.display = 'none';
+                    loadPlatform();
+                }, 500);
+            }
+
+            // =============================================
+            // 🖥️ تحميل المنصة الرئيسية
+            // =============================================
+            function loadPlatform() {
+                if (mainPlatform.classList.contains('visible')) return;
+
+                mainPlatform.classList.add('visible');
+
+                // ===== كود المنصة الكامل =====
+                const platformHTML = `
+                    <style>
+                        :root {
+                            --primary-color: #2c7a7b;
+                            --secondary-color: #285e61;
+                            --accent-color: #f6ad55;
+                            --like-color: #e53e3e;
+                            --danger-color: #e53e3e;
+                            --bg-light: #f7fafc;
+                            --text-light: #2d3748;
+                            --card-bg-light: #ffffff;
+                            --bg-dark: #1a202c;
+                            --text-dark: #e2e8f0;
+                            --card-bg-dark: #2d3748;
+                            --footer-bg-dark: #171923;
+                            --transition-speed: 0.3s;
+                            --footer-height: 90px;
+                            --header-height: 56px;
+                            --sites-bar-height: 60px;
+                        }
+
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        
+                        body {
+                            font-family: 'Tajawal', sans-serif;
+                            background-color: var(--bg-light);
+                            color: var(--text-light);
+                            transition: background-color 0.3s ease, color 0.3s ease;
+                            min-height: 100vh;
+                            padding-top: calc(var(--header-height) + var(--sites-bar-height));
+                            padding-bottom: calc(var(--footer-height) + 20px);
+                            margin: 0;
+                        }
+
+                        body.dark-mode {
+                            background-color: var(--bg-dark) !important;
+                            color: var(--text-dark) !important;
+                        }
+
+                        .navbar-custom {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            z-index: 1050;
+                            background-color: rgba(255, 255, 255, 0.95);
+                            backdrop-filter: blur(10px);
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+                            transition: background-color 0.3s ease;
+                            height: var(--header-height);
+                            padding: 0 1rem;
+                            display: flex;
+                            align-items: center;
+                        }
+                        body.dark-mode .navbar-custom {
+                            background-color: rgba(26, 32, 44, 0.98) !important;
+                        }
+                        .brand-title {
+                            font-weight: 700;
+                            color: var(--primary-color);
+                        }
+                        body.dark-mode .brand-title {
+                            color: #4fd1c5 !important;
+                        }
+
+                        .admin-btn-nav {
+                            font-size: 0.85rem;
+                            padding: 4px 12px;
+                            border-radius: 20px;
+                            border: 1px solid var(--primary-color);
+                            color: var(--primary-color);
+                            background: transparent;
+                            transition: all 0.3s;
+                            cursor: pointer;
+                        }
+                        body.dark-mode .admin-btn-nav {
+                            color: #4fd1c5 !important;
+                            border-color: #4fd1c5 !important;
+                        }
+                        .admin-btn-nav:hover,
+                        .admin-btn-nav.active {
+                            background: var(--primary-color);
+                            color: white;
+                        }
+                        body.dark-mode .admin-btn-nav:hover,
+                        body.dark-mode .admin-btn-nav.active {
+                            background: #4fd1c5 !important;
+                            color: #1a202c !important;
+                        }
+                        .admin-btn-nav.active {
+                            border-color: var(--danger-color);
+                            background: var(--danger-color);
+                        }
+                        body.dark-mode .admin-btn-nav.active {
+                            border-color: #fc8181 !important;
+                            background: #fc8181 !important;
+                            color: #1a202c !important;
+                        }
+
+                        .sites-bar {
+                            position: fixed;
+                            top: var(--header-height);
+                            left: 0;
+                            right: 0;
+                            z-index: 1040;
+                            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                            padding: 0 15px;
+                            text-align: center;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                            height: var(--sites-bar-height);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: hidden;
+                            border-bottom: 2px solid rgba(255,255,255,0.08);
+                        }
+                        body.dark-mode .sites-bar {
+                            background: linear-gradient(135deg, #1a5c5d, #0d3a3b) !important;
+                        }
+
+                        .sites-bar .sites-title {
+                            color: #fff;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            margin: 0;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            white-space: nowrap;
+                            flex-shrink: 0;
+                            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                            padding: 0 12px 0 8px;
+                            height: 100%;
+                            z-index: 2;
+                            letter-spacing: 0.5px;
+                        }
+                        body.dark-mode .sites-bar .sites-title {
+                            background: linear-gradient(135deg, #1a5c5d, #0d3a3b) !important;
+                        }
+                        .sites-bar .sites-title i {
+                            font-size: 0.9rem;
+                            color: var(--accent-color);
+                        }
+
+                        .slider-container {
+                            flex: 1;
+                            overflow: hidden;
+                            position: relative;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: transparent;
+                        }
+
+                        .slider-track {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                        }
+
+                        .slide-item {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            opacity: 0;
+                            pointer-events: none;
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        .slide-item.active {
+                            opacity: 1;
+                            pointer-events: auto;
+                        }
+
+                        .slide-item.anim-1.active { animation: animZoomFade 0.9s ease-out forwards; }
+                        .slide-item.anim-1.exit { animation: animZoomFadeOut 0.7s ease-in forwards; }
+                        .slide-item.anim-2.active { animation: animSlideLeft 0.8s ease-out forwards; }
+                        .slide-item.anim-2.exit { animation: animSlideLeftOut 0.6s ease-in forwards; }
+                        .slide-item.anim-3.active { animation: animSlideRight 0.8s ease-out forwards; }
+                        .slide-item.anim-3.exit { animation: animSlideRightOut 0.6s ease-in forwards; }
+                        .slide-item.anim-4.active { animation: animFlip 0.9s ease-out forwards; }
+                        .slide-item.anim-4.exit { animation: animFlipOut 0.6s ease-in forwards; }
+                        .slide-item.anim-5.active { animation: animBounce 1s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+                        .slide-item.anim-5.exit { animation: animFadeOut 0.5s ease-in forwards; }
+                        .slide-item.anim-6.active { animation: animRotateScale 0.9s ease-out forwards; }
+                        .slide-item.anim-6.exit { animation: animRotateScaleOut 0.6s ease-in forwards; }
+                        .slide-item.anim-7.active { animation: animGlitch 0.8s ease-out forwards; }
+                        .slide-item.anim-7.exit { animation: animFadeOut 0.4s ease-in forwards; }
+                        .slide-item.anim-8.active { animation: animSlideTop 0.8s ease-out forwards; }
+                        .slide-item.anim-8.exit { animation: animSlideTopOut 0.6s ease-in forwards; }
+
+                        @keyframes animZoomFade { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+                        @keyframes animZoomFadeOut { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
+                        @keyframes animSlideLeft { 0% { transform: translateX(-60px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+                        @keyframes animSlideLeftOut { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(60px); opacity: 0; } }
+                        @keyframes animSlideRight { 0% { transform: translateX(60px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+                        @keyframes animSlideRightOut { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-60px); opacity: 0; } }
+                        @keyframes animFlip { 0% { transform: perspective(400px) rotateY(-90deg); opacity: 0; } 100% { transform: perspective(400px) rotateY(0); opacity: 1; } }
+                        @keyframes animFlipOut { 0% { transform: perspective(400px) rotateY(0); opacity: 1; } 100% { transform: perspective(400px) rotateY(90deg); opacity: 0; } }
+                        @keyframes animBounce { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.1); opacity: 0.8; } 70% { transform: scale(0.9); opacity: 0.9; } 100% { transform: scale(1); opacity: 1; } }
+                        @keyframes animFadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+                        @keyframes animRotateScale { 0% { transform: rotate(-10deg) scale(0.7); opacity: 0; } 100% { transform: rotate(0) scale(1); opacity: 1; } }
+                        @keyframes animRotateScaleOut { 0% { transform: rotate(0) scale(1); opacity: 1; } 100% { transform: rotate(10deg) scale(0.7); opacity: 0; } }
+                        @keyframes animGlitch { 0% { transform: translate(0); opacity: 0; } 10% { transform: translate(-5px,2px); } 20% { transform: translate(5px,-2px); } 30% { transform: translate(-3px,3px); } 40% { transform: translate(3px,-3px); } 50% { transform: translate(-2px,1px); opacity: 0.7; } 60% { transform: translate(2px,-1px); } 70% { transform: translate(-4px,2px); } 80% { transform: translate(4px,-2px); } 90% { transform: translate(-1px,1px); } 100% { transform: translate(0); opacity: 1; } }
+                        @keyframes animSlideTop { 0% { transform: translateY(-60px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+                        @keyframes animSlideTopOut { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(60px); opacity: 0; } }
+
+                        .site-slide-link {
+                            color: #fff;
+                            text-decoration: none;
+                            font-weight: 700;
+                            font-size: 1.5rem;
+                            padding: 8px 20px;
+                            display: inline-block;
+                            transition: all 0.3s ease;
+                            letter-spacing: 0.5px;
+                            text-shadow: 0 2px 15px rgba(0,0,0,0.2);
+                            position: relative;
+                            background: transparent;
+                            border: none;
+                        }
+
+                        .site-slide-link::after {
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 0;
+                            height: 2px;
+                            background: rgba(255,255,255,0.4);
+                            transition: all 0.4s ease;
+                        }
+
+                        .site-slide-link:hover::after {
+                            width: 80%;
+                        }
+
+                        .site-slide-link:hover {
+                            transform: scale(1.05);
+                            color: #fff;
+                            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+                        }
+
+                        @media (max-width: 768px) {
+                            :root { --sites-bar-height: 55px; }
+                            .sites-bar { padding: 0 10px; }
+                            .sites-bar .sites-title { font-size: 0.75rem; padding: 0 8px 0 4px; }
+                            .sites-bar .sites-title i { font-size: 0.7rem; }
+                            .site-slide-link { font-size: 1.1rem; padding: 4px 12px; }
+                            body { padding-top: calc(var(--header-height) + var(--sites-bar-height) + 5px); }
+                        }
+
+                        @media (max-width: 480px) {
+                            :root { --sites-bar-height: 48px; }
+                            .site-slide-link { font-size: 0.9rem; padding: 3px 10px; }
+                            .sites-bar .sites-title { font-size: 0.65rem; }
+                        }
+
+                        .hero-section {
+                            padding: 1rem 1rem 0.5rem;
+                            text-align: center;
+                            animation: fadeInDown 0.8s ease-out;
+                        }
+                        body.dark-mode .hero-section h2 {
+                            color: #e2e8f0 !important;
+                        }
+                        body.dark-mode .hero-section p {
+                            color: #a0aec0 !important;
+                        }
+                        .hero-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 0.3rem; animation: pulse 2s infinite; }
+
+                        .facts-container { max-width: 800px; margin: 0 auto; padding: 0 1rem; }
+
+                        .fact-card {
+                            background-color: var(--card-bg-light);
+                            border: none;
+                            border-radius: 15px;
+                            padding: 1.5rem;
+                            margin-bottom: 1.5rem;
+                            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease, color 0.3s ease;
+                            animation: fadeInUp 0.5s ease-out backwards;
+                            position: relative;
+                        }
+                        body.dark-mode .fact-card {
+                            background-color: var(--card-bg-dark) !important;
+                            box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important;
+                            color: #e2e8f0 !important;
+                        }
+                        body.admin-mode .fact-card {
+                            border: 2px dashed var(--danger-color);
+                        }
+
+                        .fact-header {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 1rem;
+                            color: var(--primary-color);
+                            font-weight: bold;
+                            font-size: 1.1rem;
+                        }
+                        body.dark-mode .fact-header {
+                            color: #4fd1c5 !important;
+                        }
+                        .fact-header i { margin-left: 0.5rem; }
+                        .fact-content { font-size: 1.1rem; line-height: 1.6; }
+
+                        .card-actions {
+                            margin-top: 1rem;
+                            display: flex;
+                            justify-content: flex-end;
+                            gap: 15px;
+                            align-items: center;
+                        }
+
+                        .btn-like {
+                            border: none;
+                            background: transparent;
+                            color: var(--text-light);
+                            opacity: 0.7;
+                            transition: all 0.3s ease;
+                            cursor: pointer;
+                            font-size: 1.1rem;
+                            display: flex;
+                            align-items: center;
+                            gap: 6px;
+                            padding: 5px 10px;
+                            border-radius: 20px;
+                        }
+                        body.dark-mode .btn-like {
+                            color: #a0aec0 !important;
+                        }
+                        .btn-like:hover { opacity: 1; background-color: rgba(229, 62, 62, 0.1); }
+                        .btn-like.liked { color: var(--like-color); opacity: 1; font-weight: bold; }
+                        body.dark-mode .btn-like.liked {
+                            color: #fc8181 !important;
+                        }
+                        .btn-like.liked i { animation: likePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+                        .like-count { font-size: 0.95rem; font-weight: 600; }
+
+                        .btn-delete {
+                            border: none;
+                            background: rgba(229, 62, 62, 0.1);
+                            color: var(--danger-color);
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 50%;
+                            display: none;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            font-size: 1rem;
+                        }
+                        body.dark-mode .btn-delete {
+                            background: rgba(252, 129, 129, 0.15) !important;
+                            color: #fc8181 !important;
+                        }
+                        .btn-delete:hover { background: var(--danger-color); color: white; transform: scale(1.1); }
+                        body.dark-mode .btn-delete:hover {
+                            background: #fc8181 !important;
+                            color: #1a202c !important;
+                        }
+                        body.admin-mode .btn-delete { display: flex; }
+
+                        .loading-overlay {
+                            display: none;
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: rgba(0,0,0,0.3);
+                            z-index: 9999;
+                            align-items: center;
+                            justify-content: center;
+                            backdrop-filter: blur(3px);
+                        }
+                        .loading-overlay.show { display: flex; }
+                        .spinner-border-lg { width: 3rem; height: 3rem; color: var(--primary-color); }
+                        body.dark-mode .spinner-border-lg {
+                            color: #4fd1c5 !important;
+                        }
+
+                        .fixed-footer {
+                            position: fixed;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            height: var(--footer-height);
+                            background-color: rgba(255, 255, 255, 0.95);
+                            backdrop-filter: blur(10px);
+                            border-top: 1px solid rgba(0,0,0,0.05);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 900;
+                            transition: background-color 0.3s ease;
+                            gap: 8px;
+                        }
+                        body.dark-mode .fixed-footer {
+                            background-color: rgba(26, 32, 44, 0.98) !important;
+                            border-top: 1px solid rgba(255,255,255,0.05) !important;
+                        }
+                        .footer-text { font-size: 0.85rem; font-weight: 500; margin: 0; }
+                        body.dark-mode .footer-text {
+                            color: #a0aec0 !important;
+                        }
+                        .creator-name { color: var(--primary-color); font-weight: 700; }
+                        body.dark-mode .creator-name {
+                            color: #4fd1c5 !important;
+                        }
+
+                        .contact-row { display: flex; gap: 20px; align-items: center; }
+                        .contact-link {
+                            color: var(--text-light);
+                            opacity: 0.6;
+                            font-size: 1rem;
+                            transition: all 0.3s ease;
+                            text-decoration: none;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                        }
+                        body.dark-mode .contact-link {
+                            color: #a0aec0 !important;
+                        }
+                        .contact-link:hover { opacity: 1; transform: translateY(-2px); }
+                        body.dark-mode .contact-link:hover {
+                            color: #fff !important;
+                        }
+                        .contact-link.whatsapp:hover { color: #25D366; background: rgba(37, 211, 102, 0.1); }
+                        .contact-link.sms:hover { color: var(--primary-color); background: rgba(44, 122, 123, 0.1); }
+                        .contact-link.phone:hover { color: var(--accent-color); background: rgba(246, 173, 85, 0.1); }
+
+                        .fab-container {
+                            position: fixed;
+                            bottom: calc(var(--footer-height) + 20px);
+                            left: 20px;
+                            z-index: 1000;
+                        }
+                        .fab-btn {
+                            width: 55px;
+                            height: 55px;
+                            border-radius: 50%;
+                            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                            color: white;
+                            border: none;
+                            box-shadow: 0 4px 15px rgba(44, 122, 123, 0.4);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.4rem;
+                            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                            cursor: pointer;
+                        }
+                        body.dark-mode .fab-btn {
+                            background: linear-gradient(135deg, #4fd1c5, #2c7a7b) !important;
+                            box-shadow: 0 4px 15px rgba(79, 209, 197, 0.4) !important;
+                        }
+                        .fab-btn:hover { transform: scale(1.1) rotate(90deg); }
+                        body.dark-mode .fab-btn:hover {
+                            background: linear-gradient(135deg, #38b2ac, #1a5c5d) !important;
+                        }
+
+                        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+                        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+                        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+                        @keyframes likePop { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
+                        ::-webkit-scrollbar { width: 6px; }
+                        ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 3px; }
+                        body.dark-mode ::-webkit-scrollbar-thumb { background: #4fd1c5 !important; }
+                    </style>
+
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div class="spinner-border spinner-border-lg" role="status"></div>
+                    </div>
+
+                    <nav class="navbar-custom d-flex align-items-center">
+                        <div class="container d-flex justify-content-between align-items-center">
+                            <span class="navbar-brand brand-title mb-0 h1">
+                                <i class="fa-solid fa-lightbulb ms-2"></i>منصة المعرفة
+                            </span>
+                            <div class="d-flex align-items-center gap-2">
+                                <button id="adminToggle" class="admin-btn-nav">
+                                    <i class="fa-solid fa-user-shield ms-1"></i> Admin
+                                </button>
+                                <button id="themeToggle" class="btn btn-link text-decoration-none">
+                                    <i class="fa-solid fa-moon fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="sites-bar">
+                        <span class="sites-title">
+                            <i class="fa-solid fa-link"></i> مواقع صديقة :
+                        </span>
+                        <div class="slider-container">
+                            <div class="slider-track" id="sliderTrack"></div>
+                        </div>
+                    </div>
+
+                    <header class="hero-section">
+                        <div class="hero-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h2 class="fw-bold mb-2">هل تعلم أن...؟</h2>
+                        <p class="opacity-75 mb-0">شاركنا معلومة مفيدة واكتشف عجائب العالم</p>
+                    </header>
+
+                    <main class="facts-container" id="factsList"></main>
+
+                    <div class="fab-container">
+                        <button class="fab-btn" id="addFactBtn" title="أضف معلومة جديدة">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <footer class="fixed-footer">
+                        <p class="footer-text">إنشاء و تصميم : <span class="creator-name">م.الصديق الإدريسي</span></p>
+                        <div class="contact-row">
+                            <a href="https://wa.me/212608975435" target="_blank" class="contact-link whatsapp" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="sms:+212608975435" class="contact-link sms" title="رسالة نصية"><i class="fa-solid fa-comment-sms"></i></a>
+                            <a href="tel:+212608975435" class="contact-link phone" title="اتصال"><i class="fa-solid fa-phone"></i></a>
+                        </div>
+                    </footer>
+                `;
+
+                mainPlatform.innerHTML = platformHTML;
+
+                setTimeout(() => {
+                    // =============================================
+                    // ⚙️ CONFIGURATION
+                    // =============================================
+                    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOf0tmqkwYTX4gK83_DznXpyQfhyItbOQo1T-IKXIh3FuWjyNKIiFoJo_ltojDjcBY/exec';
+                    const ADMIN_PASSWORD = "Seddik";
+
+                    // =============================================
+                    // 📋 LISTE DES SITES
+                    // =============================================
+                    const SITES = [
+                        { name: 'راديو القرآن الكريم', url: 'https://radiocoran.vercel.app' },
+                        { name: 'تلاوة القرآن الكريم', url: 'https://tilawatquran.vercel.app' },
+                        { name: 'آية كل يوم لعلها تكون رسالة', url: 'https://ayatoday.vercel.app' },
+                    ];
+
+                    // =============================================
+                    // 🎠 SLIDER
+                    // =============================================
+                    let currentSlide = 0;
+                    let sliderInterval = null;
+                    const SLIDER_INTERVAL = 3000;
+                    const ANIMATIONS = ['anim-1', 'anim-2', 'anim-3', 'anim-4', 'anim-5', 'anim-6', 'anim-7', 'anim-8'];
+
+                    function buildSlider() {
+                        const track = document.getElementById('sliderTrack');
+                        if (!track) return;
+                        track.innerHTML = '';
+
+                        SITES.forEach((site, index) => {
+                            const slide = document.createElement('div');
+                            const animClass = ANIMATIONS[index % ANIMATIONS.length];
+                            slide.className = `slide-item ${animClass}`;
+                            if (index === 0) slide.classList.add('active');
+                            slide.innerHTML = `
+                                <a href="${site.url}" target="_blank" class="site-slide-link">
+                                    ${site.name}
+                                </a>
+                            `;
+                            track.appendChild(slide);
+                        });
+
+                        startAutoplay();
+                    }
+
+                    function goToSlide(index) {
+                        const slides = document.querySelectorAll('.slide-item');
+                        if (slides.length === 0) return;
+
+                        if (index < 0) index = slides.length - 1;
+                        if (index >= slides.length) index = 0;
+
+                        slides.forEach(s => {
+                            s.classList.remove('active', 'exit');
+                        });
+
+                        if (slides[currentSlide]) {
+                            slides[currentSlide].classList.add('exit');
+                        }
+
+                        slides[index].classList.add('active');
+                        currentSlide = index;
+                    }
+
+                    function nextSlide() {
+                        const slides = document.querySelectorAll('.slide-item');
+                        const next = (currentSlide + 1) % slides.length;
+                        goToSlide(next);
+                    }
+
+                    function startAutoplay() {
+                        if (sliderInterval) clearInterval(sliderInterval);
+                        sliderInterval = setInterval(nextSlide, SLIDER_INTERVAL);
+                    }
+
+                    function stopAutoplay() {
+                        if (sliderInterval) {
+                            clearInterval(sliderInterval);
+                            sliderInterval = null;
+                        }
+                    }
+
+                    const container = document.querySelector('.slider-container');
+                    if (container) {
+                        container.addEventListener('mouseenter', stopAutoplay);
+                        container.addEventListener('mouseleave', startAutoplay);
+                        container.addEventListener('touchstart', stopAutoplay);
+                        container.addEventListener('touchend', startAutoplay);
+                    }
+
+                    // =============================================
+                    // 📡 GOOGLE SHEETS API
+                    // =============================================
+                    let facts = [];
+                    let userLikes = JSON.parse(localStorage.getItem('userLikedFacts')) || [];
+                    let isAdmin = false;
+
+                    const factsListEl = document.getElementById('factsList');
+                    const addFactBtn = document.getElementById('addFactBtn');
+                    const themeToggleBtn = document.getElementById('themeToggle');
+                    const adminToggleBtn = document.getElementById('adminToggle');
+                    const body = document.body;
+                    const themeIcon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
+                    const loadingOverlay = document.getElementById('loadingOverlay');
+
+                    function showLoading() { if (loadingOverlay) loadingOverlay.classList.add('show'); }
+                    function hideLoading() { if (loadingOverlay) loadingOverlay.classList.remove('show'); }
+
+                    function shuffleArray(array) {
+                        const arr = [...array];
+                        for (let i = arr.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [arr[i], arr[j]] = [arr[j], arr[i]];
+                        }
+                        return arr;
+                    }
+
+                    async function fetchFacts() {
+                        showLoading();
+                        try {
+                            const response = await fetch(`${SCRIPT_URL}?action=getFacts`);
+                            const data = await response.json();
+                            if (data.success) {
+                                facts = data.facts.map(f => ({
+                                    id: parseInt(f.id),
+                                    text: f.text,
+                                    likes: parseInt(f.likes) || 0
+                                }));
+                                renderFacts(true);
+                            } else {
+                                Swal.fire('خطأ', data.message || 'فشل جلب البيانات', 'error');
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            Swal.fire('خطأ الاتصال', 'تأكد من رابط Google Apps Script', 'error');
+                        } finally {
+                            hideLoading();
+                        }
+                    }
+
+                    async function addFactToSheet(text) {
+                        showLoading();
+                        try {
+                            await fetch(SCRIPT_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ action: 'addFact', text: text })
+                            });
+                            await new Promise(r => setTimeout(r, 1000));
+                            await fetchFacts();
+                            Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'تمت الإضافة!', showConfirmButton: false, timer: 2000 });
+                        } catch (err) {
+                            hideLoading();
+                            Swal.fire('خطأ', 'فشل إضافة المعلومة', 'error');
+                        }
+                    }
+
+                    async function deleteFactFromSheet(factId) {
+                        showLoading();
+                        try {
+                            await fetch(SCRIPT_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ action: 'deleteFact', id: factId })
+                            });
+                            await new Promise(r => setTimeout(r, 1000));
+                            await fetchFacts();
+                            Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'تم الحذف', showConfirmButton: false, timer: 1500 });
+                        } catch (err) {
+                            hideLoading();
+                            Swal.fire('خطأ', 'فشل حذف المعلومة', 'error');
+                        }
+                    }
+
+                    async function updateLikeInSheet(factId, newLikeCount) {
+                        fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ action: 'updateLike', id: factId, likes: newLikeCount })
+                        }).catch(err => console.error('Like sync failed:', err));
+                    }
+
+                    window.toggleLike = (factId) => {
+                        if (isAdmin) return;
+                        const factIndex = facts.findIndex(f => f.id === factId);
+                        if (factIndex === -1) return;
+
+                        const likeIndex = userLikes.indexOf(factId);
+                        if (likeIndex === -1) {
+                            facts[factIndex].likes += 1;
+                            userLikes.push(factId);
+                        } else {
+                            facts[factIndex].likes = Math.max(0, facts[factIndex].likes - 1);
+                            userLikes.splice(likeIndex, 1);
+                        }
+
+                        localStorage.setItem('userLikedFacts', JSON.stringify(userLikes));
+                        updateLikeButtonUI(factId);
+                        updateLikeInSheet(factId, facts[factIndex].likes);
+                    };
+
+                    function updateLikeButtonUI(factId) {
+                        const fact = facts.find(f => f.id === factId);
+                        if (!fact) return;
+                        const btn = document.getElementById(`like-btn-${factId}`);
+                        if (btn) {
+                            const isLiked = userLikes.includes(factId);
+                            btn.classList.toggle('liked', isLiked);
+                            btn.querySelector('.like-count').textContent = fact.likes;
+                            btn.querySelector('i').className = isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+                        }
+                    }
+
+                    window.deleteFact = (factId) => {
+                        Swal.fire({
+                            title: 'حذف المعلومة؟',
+                            text: 'هل أنت متأكد من حذف هذه المعلومة نهائياً؟',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#e53e3e',
+                            cancelButtonColor: '#718096',
+                            confirmButtonText: 'نعم، احذف',
+                            cancelButtonText: 'إلغاء'
+                        }).then((result) => {
+                            if (result.isConfirmed) deleteFactFromSheet(factId);
+                        });
+                    };
+
+                    function renderFacts(shouldShuffle = true) {
+                        if (!factsListEl) return;
+                        factsListEl.innerHTML = '';
+                        const displayFacts = shouldShuffle ? shuffleArray(facts) : facts;
+
+                        displayFacts.forEach((fact, index) => {
+                            const isLiked = userLikes.includes(fact.id);
+                            const card = document.createElement('div');
+                            card.className = 'fact-card';
+                            card.style.animationDelay = `${index * 0.05}s`;
+                            card.innerHTML = `
+                                <div class="fact-header">
+                                    <i class="fa-solid fa-quote-right"></i>
+                                    <span>هل تعلم أن...</span>
+                                </div>
+                                <div class="fact-content">${fact.text}</div>
+                                <div class="card-actions">
+                                    <button class="btn-delete" onclick="deleteFact(${fact.id})" title="حذف">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                    <button id="like-btn-${fact.id}" class="btn-like ${isLiked ? 'liked' : ''}" 
+                                            onclick="toggleLike(${fact.id})" title="أعجبني">
+                                        <i class="${isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}"></i>
+                                        <span class="like-count">${fact.likes || 0}</span>
+                                    </button>
+                                </div>`;
+                            factsListEl.appendChild(card);
+                        });
+                    }
+
+                    // --- Admin Logic ---
+                    if (adminToggleBtn) {
+                        adminToggleBtn.addEventListener('click', () => {
+                            if (isAdmin) {
+                                isAdmin = false;
+                                body.classList.remove('admin-mode');
+                                adminToggleBtn.classList.remove('active');
+                                adminToggleBtn.innerHTML = '<i class="fa-solid fa-user-shield ms-1"></i> Admin';
+                                renderFacts(false);
+                                Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'تم تسجيل الخروج', showConfirmButton: false, timer: 1500 });
+                            } else {
+                                Swal.fire({
+                                    title: 'دخول الأدمن',
+                                    input: 'password',
+                                    inputLabel: 'أدخل كلمة المرور',
+                                    confirmButtonText: 'دخول',
+                                    confirmButtonColor: '#2c7a7b',
+                                    showCancelButton: true,
+                                    cancelButtonText: 'إلغاء',
+                                    inputValidator: (v) => !v ? 'الرجاء إدخال كلمة المرور' : v !== ADMIN_PASSWORD ? 'كلمة المرور خاطئة!' : null
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        isAdmin = true;
+                                        body.classList.add('admin-mode');
+                                        adminToggleBtn.classList.add('active');
+                                        adminToggleBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket ms-1"></i> خروج';
+                                        renderFacts(false);
+                                        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'مرحباً أيها الأدمن!', showConfirmButton: false, timer: 1500 });
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    // --- Add Fact ---
+                    if (addFactBtn) {
+                        addFactBtn.addEventListener('click', () => {
+                            Swal.fire({
+                                title: 'شاركنا معلومة',
+                                input: 'textarea',
+                                inputLabel: 'اكتب "هل تعلم أن..." جديدة',
+                                confirmButtonText: 'نشر المعلومة',
+                                confirmButtonColor: '#2c7a7b',
+                                showCancelButton: true,
+                                cancelButtonText: 'إلغاء',
+                                preConfirm: (v) => (!v || !v.trim()) ? Swal.showValidationMessage('الرجاء كتابة معلومة') : v
+                            }).then((result) => {
+                                if (result.isConfirmed) addFactToSheet(result.value.trim());
+                            });
+                        });
+                    }
+
+                    // --- Dark Mode ---
+                    function updateThemeIcon() {
+                        if (!themeIcon) return;
+                        if (body.classList.contains('dark-mode')) {
+                            themeIcon.classList.replace('fa-moon', 'fa-sun');
+                            themeIcon.style.color = '#f6ad55';
+                        } else {
+                            themeIcon.classList.replace('fa-sun', 'fa-moon');
+                            themeIcon.style.color = '';
+                        }
+                    }
+
+                    if (themeToggleBtn) {
+                        themeToggleBtn.addEventListener('click', () => {
+                            body.classList.toggle('dark-mode');
+                            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+                            updateThemeIcon();
+                        });
+                    }
+
+                    // --- Init ---
+                    const savedTheme = localStorage.getItem('theme');
+                    if (savedTheme === 'dark') body.classList.add('dark-mode');
+                    updateThemeIcon();
+                    buildSlider();
+                    fetchFacts();
+
+                }, 200);
+            }
+
+            // =============================================
+            // 🎯 زر الدخول
+            // =============================================
+            if (enterBtn) {
+                enterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goToMain();
+                });
+            }
+
+        })();
     </script>
+
 </body>
 </html>
