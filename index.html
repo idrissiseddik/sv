@@ -25,6 +25,8 @@
             --footer-bg-dark: #171923;
             --transition-speed: 0.3s;
             --footer-height: 90px;
+            --header-height: 56px;
+            --sites-bar-height: 60px;
         }
 
         body {
@@ -33,16 +35,27 @@
             color: var(--text-light);
             transition: background-color var(--transition-speed), color var(--transition-speed);
             min-height: 100vh;
+            padding-top: calc(var(--header-height) + var(--sites-bar-height));
             padding-bottom: calc(var(--footer-height) + 20px); 
         }
 
         body.dark-mode { background-color: var(--bg-dark); color: var(--text-dark); }
 
+        /* ============================================= */
+        /* 🏷️ HEADER FIXE (navbar)                     */
+        /* ============================================= */
         .navbar-custom {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1050;
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             transition: background-color var(--transition-speed);
+            height: var(--header-height);
+            padding: 0 1rem;
         }
         body.dark-mode .navbar-custom { background-color: rgba(26, 32, 44, 0.95); }
         .brand-title { font-weight: 700; color: var(--primary-color); }
@@ -55,8 +68,319 @@
         .admin-btn-nav:hover, .admin-btn-nav.active { background: var(--primary-color); color: white; }
         .admin-btn-nav.active { border-color: var(--danger-color); background: var(--danger-color); }
 
-        .hero-section { padding: 2rem 1rem; text-align: center; animation: fadeInDown 0.8s ease-out; }
-        .hero-icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem; animation: pulse 2s infinite; }
+        /* ============================================= */
+        /* 🏷️ BANDEAU "مواقع صديقة" - SLIDER SANS POINTS */
+        /* ============================================= */
+        .sites-bar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            right: 0;
+            z-index: 1040;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 0 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            height: var(--sites-bar-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(255,255,255,0.08);
+        }
+
+        .sites-bar .sites-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 0 12px 0 8px;
+            height: 100%;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+        .sites-bar .sites-title i {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
+
+        /* ===== SLIDER SANS POINTS ===== */
+        .slider-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+
+        .slider-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide-item.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ===== ANIMATIONS VARIÉES ===== */
+        /* Animation 1: Zoom + Fade */
+        .slide-item.anim-1 {
+            animation: none;
+        }
+        .slide-item.anim-1.active {
+            animation: animZoomFade 0.9s ease-out forwards;
+        }
+        .slide-item.anim-1.exit {
+            animation: animZoomFadeOut 0.7s ease-in forwards;
+        }
+
+        /* Animation 2: Slide from left */
+        .slide-item.anim-2.active {
+            animation: animSlideLeft 0.8s ease-out forwards;
+        }
+        .slide-item.anim-2.exit {
+            animation: animSlideLeftOut 0.6s ease-in forwards;
+        }
+
+        /* Animation 3: Slide from right */
+        .slide-item.anim-3.active {
+            animation: animSlideRight 0.8s ease-out forwards;
+        }
+        .slide-item.anim-3.exit {
+            animation: animSlideRightOut 0.6s ease-in forwards;
+        }
+
+        /* Animation 4: Flip + Fade */
+        .slide-item.anim-4.active {
+            animation: animFlip 0.9s ease-out forwards;
+        }
+        .slide-item.anim-4.exit {
+            animation: animFlipOut 0.6s ease-in forwards;
+        }
+
+        /* Animation 5: Bounce + Fade */
+        .slide-item.anim-5.active {
+            animation: animBounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .slide-item.anim-5.exit {
+            animation: animFadeOut 0.5s ease-in forwards;
+        }
+
+        /* Animation 6: Rotate + Scale */
+        .slide-item.anim-6.active {
+            animation: animRotateScale 0.9s ease-out forwards;
+        }
+        .slide-item.anim-6.exit {
+            animation: animRotateScaleOut 0.6s ease-in forwards;
+        }
+
+        /* Animation 7: Glitch */
+        .slide-item.anim-7.active {
+            animation: animGlitch 0.8s ease-out forwards;
+        }
+        .slide-item.anim-7.exit {
+            animation: animFadeOut 0.4s ease-in forwards;
+        }
+
+        /* Animation 8: Slide from top */
+        .slide-item.anim-8.active {
+            animation: animSlideTop 0.8s ease-out forwards;
+        }
+        .slide-item.anim-8.exit {
+            animation: animSlideTopOut 0.6s ease-in forwards;
+        }
+
+        /* ===== KEYFRAMES ===== */
+        @keyframes animZoomFade {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes animZoomFadeOut {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        @keyframes animSlideLeft {
+            0% { transform: translateX(-60px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes animSlideLeftOut {
+            0% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(60px); opacity: 0; }
+        }
+
+        @keyframes animSlideRight {
+            0% { transform: translateX(60px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes animSlideRightOut {
+            0% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(-60px); opacity: 0; }
+        }
+
+        @keyframes animFlip {
+            0% { transform: perspective(400px) rotateY(-90deg); opacity: 0; }
+            100% { transform: perspective(400px) rotateY(0); opacity: 1; }
+        }
+        @keyframes animFlipOut {
+            0% { transform: perspective(400px) rotateY(0); opacity: 1; }
+            100% { transform: perspective(400px) rotateY(90deg); opacity: 0; }
+        }
+
+        @keyframes animBounce {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            70% { transform: scale(0.9); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes animFadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes animRotateScale {
+            0% { transform: rotate(-10deg) scale(0.7); opacity: 0; }
+            100% { transform: rotate(0) scale(1); opacity: 1; }
+        }
+        @keyframes animRotateScaleOut {
+            0% { transform: rotate(0) scale(1); opacity: 1; }
+            100% { transform: rotate(10deg) scale(0.7); opacity: 0; }
+        }
+
+        @keyframes animGlitch {
+            0% { transform: translate(0); opacity: 0; }
+            10% { transform: translate(-5px, 2px); }
+            20% { transform: translate(5px, -2px); }
+            30% { transform: translate(-3px, 3px); }
+            40% { transform: translate(3px, -3px); }
+            50% { transform: translate(-2px, 1px); opacity: 0.7; }
+            60% { transform: translate(2px, -1px); }
+            70% { transform: translate(-4px, 2px); }
+            80% { transform: translate(4px, -2px); }
+            90% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0); opacity: 1; }
+        }
+
+        @keyframes animSlideTop {
+            0% { transform: translateY(-60px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes animSlideTopOut {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(60px); opacity: 0; }
+        }
+
+        /* ===== STYLE DES LIENS (SANS CADRE) ===== */
+        .site-slide-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.5rem;
+            padding: 8px 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: relative;
+            background: transparent;
+            border: none;
+        }
+
+        .site-slide-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.4);
+            transition: all 0.4s ease;
+        }
+
+        .site-slide-link:hover::after {
+            width: 80%;
+        }
+
+        .site-slide-link:hover {
+            transform: scale(1.05);
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        /* Adaptation pour mobile */
+        @media (max-width: 768px) {
+            :root {
+                --sites-bar-height: 55px;
+            }
+            .sites-bar {
+                padding: 0 10px;
+            }
+            .sites-bar .sites-title {
+                font-size: 0.75rem;
+                padding: 0 8px 0 4px;
+            }
+            .sites-bar .sites-title i {
+                font-size: 0.7rem;
+            }
+            .site-slide-link {
+                font-size: 1.1rem;
+                padding: 4px 12px;
+            }
+            body {
+                padding-top: calc(var(--header-height) + var(--sites-bar-height) + 5px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --sites-bar-height: 48px;
+            }
+            .site-slide-link {
+                font-size: 0.9rem;
+                padding: 3px 10px;
+            }
+            .sites-bar .sites-title {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* ===== RESTE DU STYLE ===== */
+        .hero-section { 
+            padding: 1rem 1rem 0.5rem; 
+            text-align: center; 
+            animation: fadeInDown 0.8s ease-out; 
+        }
+        .hero-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 0.3rem; animation: pulse 2s infinite; }
 
         .facts-container { max-width: 800px; margin: 0 auto; padding: 0 1rem; }
 
@@ -96,7 +420,6 @@
         .btn-delete:hover { background: var(--danger-color); color: white; transform: scale(1.1); }
         body.admin-mode .btn-delete { display: flex; }
 
-        /* Loading Spinner */
         .loading-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.3); z-index: 9999;
@@ -153,7 +476,10 @@
         <div class="spinner-border spinner-border-lg" role="status"></div>
     </div>
 
-    <nav class="navbar navbar-custom sticky-top">
+    <!-- ============================================= -->
+    <!-- 🏷️ HEADER FIXE (navbar)                     -->
+    <!-- ============================================= -->
+    <nav class="navbar-custom d-flex align-items-center">
         <div class="container d-flex justify-content-between align-items-center">
             <span class="navbar-brand brand-title mb-0 h1">
                 <i class="fa-solid fa-lightbulb ms-2"></i>منصة المعرفة
@@ -168,6 +494,20 @@
             </div>
         </div>
     </nav>
+
+    <!-- ============================================= -->
+    <!-- 🏷️ BANDEAU "مواقع صديقة" - SLIDER SANS POINTS -->
+    <!-- ============================================= -->
+    <div class="sites-bar">
+        <span class="sites-title">
+            <i class="fa-solid fa-link"></i> مواقع صديقة :
+        </span>
+        <div class="slider-container">
+            <div class="slider-track" id="sliderTrack">
+                <!-- Les slides sont générés par JavaScript -->
+            </div>
+        </div>
+    </div>
 
     <header class="hero-section">
         <div class="hero-icon"><i class="fa-solid fa-brain"></i></div>
@@ -197,17 +537,110 @@
 
     <script>
         // =============================================
-        // ⚙️ CONFIGURATION - BDEL HAD L-URL B DYALEK
+        // ⚙️ CONFIGURATION
         // =============================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOf0tmqkwYTX4gK83_DznXpyQfhyItbOQo1T-IKXIh3FuWjyNKIiFoJo_ltojDjcBY/exec';
         const ADMIN_PASSWORD = "Seddik";
 
-        // --- State ---
+        // =============================================
+        // 📋 LISTE DES SITES (AJOUTE ICI TES LIENS)
+        // =============================================
+        const SITES = [
+            { name: 'راديو القرآن الكريم', url: 'https://radiocoran.vercel.app' },
+            { name: 'تلاوة القرآن الكريم', url: 'https://tilawatquran.vercel.app' },
+            { name: 'آية كل يوم لعلها تكون رسالة', url: 'https://ayatoday.vercel.app' },
+        ];
+
+        // =============================================
+        // 🎠 SLIDER AUTOMATIQUE SANS POINTS
+        // =============================================
+        let currentSlide = 0;
+        let sliderInterval = null;
+        const SLIDER_INTERVAL = 3000;
+
+        // Liste des animations (chaque site aura une animation différente)
+        const ANIMATIONS = ['anim-1', 'anim-2', 'anim-3', 'anim-4', 'anim-5', 'anim-6', 'anim-7', 'anim-8'];
+
+        function buildSlider() {
+            const track = document.getElementById('sliderTrack');
+            track.innerHTML = '';
+
+            SITES.forEach((site, index) => {
+                const slide = document.createElement('div');
+                // Chaque slide reçoit une animation différente (cycle)
+                const animClass = ANIMATIONS[index % ANIMATIONS.length];
+                slide.className = `slide-item ${animClass}`;
+                if (index === 0) slide.classList.add('active');
+                slide.innerHTML = `
+                    <a href="${site.url}" target="_blank" class="site-slide-link">
+                        ${site.name}
+                    </a>
+                `;
+                track.appendChild(slide);
+            });
+
+            startAutoplay();
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.slide-item');
+            if (slides.length === 0) return;
+
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+
+            // Retirer les classes actives et exit de tous les slides
+            slides.forEach(s => {
+                s.classList.remove('active', 'exit');
+            });
+
+            // Ajouter 'exit' au slide actuel (pour l'animation de sortie)
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.add('exit');
+            }
+
+            // Ajouter 'active' au nouveau slide
+            slides[index].classList.add('active');
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slide-item');
+            const next = (currentSlide + 1) % slides.length;
+            goToSlide(next);
+        }
+
+        function startAutoplay() {
+            if (sliderInterval) clearInterval(sliderInterval);
+            sliderInterval = setInterval(nextSlide, SLIDER_INTERVAL);
+        }
+
+        function stopAutoplay() {
+            if (sliderInterval) {
+                clearInterval(sliderInterval);
+                sliderInterval = null;
+            }
+        }
+
+        // Pause au survol
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.slider-container');
+            if (container) {
+                container.addEventListener('mouseenter', stopAutoplay);
+                container.addEventListener('mouseleave', startAutoplay);
+                container.addEventListener('touchstart', stopAutoplay);
+                container.addEventListener('touchend', startAutoplay);
+            }
+        });
+
+        // =============================================
+        // 📡 GOOGLE SHEETS API FUNCTIONS
+        // =============================================
         let facts = [];
         let userLikes = JSON.parse(localStorage.getItem('userLikedFacts')) || [];
         let isAdmin = false;
 
-        // --- DOM Elements ---
         const factsListEl = document.getElementById('factsList');
         const addFactBtn = document.getElementById('addFactBtn');
         const themeToggleBtn = document.getElementById('themeToggle');
@@ -216,7 +649,6 @@
         const themeIcon = themeToggleBtn.querySelector('i');
         const loadingOverlay = document.getElementById('loadingOverlay');
 
-        // --- Utility Functions ---
         function showLoading() { loadingOverlay.classList.add('show'); }
         function hideLoading() { loadingOverlay.classList.remove('show'); }
 
@@ -228,10 +660,6 @@
             }
             return arr;
         }
-
-        // =============================================
-        // 📡 GOOGLE SHEETS API FUNCTIONS
-        // =============================================
 
         async function fetchFacts() {
             showLoading();
@@ -259,14 +687,13 @@
         async function addFactToSheet(text) {
             showLoading();
             try {
-                const response = await fetch(SCRIPT_URL, {
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ action: 'addFact', text: text })
                 });
-                // no-cors doesn't return readable response, so we refetch
-                await new Promise(r => setTimeout(r, 1000)); // Wait for sheet to update
+                await new Promise(r => setTimeout(r, 1000));
                 await fetchFacts();
                 Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'تمت الإضافة!', showConfirmButton: false, timer: 2000 });
             } catch (err) {
@@ -294,7 +721,6 @@
         }
 
         async function updateLikeInSheet(factId, newLikeCount) {
-            // Fire and forget - don't block UI
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -434,7 +860,8 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') body.classList.add('dark-mode');
             updateThemeIcon();
-            fetchFacts(); // 🔑 Load from Google Sheet on startup
+            buildSlider();
+            fetchFacts();
         });
     </script>
 </body>
